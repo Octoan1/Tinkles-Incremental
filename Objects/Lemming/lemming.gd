@@ -7,14 +7,12 @@ const SPEED = 150.0
 @export var death_value: float = 3.0
 @export var damage_value: float = 1.0
 @export var life_span: float = 30.0
+var traits: Array[String]
 
 @onready var invuln_timer: Timer = $invuln_timer
 
 var invuln_duration: float = 0.5
 var invulnerable: bool = false
-
-signal damage_taken(amount)
-signal lemming_dead(amount)
 
 func _ready():
 	invuln_timer.wait_time = invuln_duration
@@ -24,15 +22,23 @@ func take_damage(damage_amount):
 		invulnerable = true
 		invuln_timer.start()
 		
-		var total_goo = damage_amount * damage_value
-		emit_signal("damage_taken", total_goo)
+		# calculate health_lost
+		var health_lost = health - damage_amount
+		if health_lost <= 0:
+			health_lost = health
+		else:
+			health_lost = health - (health - damage_amount)
+		
+		var total_goo = health_lost * damage_value
 		health -= damage_amount
 		
-		print(damage_amount, " health lost")
+		GameManager.modify_goo(total_goo)
+		
+		if health <= 0:
+			die()
 
 func die():
-	emit_signal("lemming_dead", death_value)
-	print("lemming dead")
+	GameManager.modify_goo(death_value)
 	self.queue_free()
 
 func _physics_process(delta: float) -> void:
