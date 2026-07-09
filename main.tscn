@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://byqrbl5ekqen8"]
 
-[ext_resource type="Script" uid="uid://0p1qsoxpibrv" path="res://lemming_spawner.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://c0arlauc1koa8" path="res://lemming.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://0p1qsoxpibrv" path="res://Game Logic/lemming_spawner.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://c0arlauc1koa8" path="res://Objects/Lemming/lemming.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://ci8eqs22jrag3" path="res://Game Logic/damage_area.tscn" id="3_h2yge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
 size = Vector2(874.5, 311)
@@ -25,5 +26,9 @@ scene = ExtResource("2_0xm2m")
 
 [node name="Timer" type="Timer" parent="LemmingSpawner" unique_id=805387629]
 autostart = true
+
+[node name="CliffDamage" parent="." unique_id=743706955 instance=ExtResource("3_h2yge")]
+position = Vector2(1096, 644)
+scale = Vector2(28.439999, 1)
 
 [connection signal="timeout" from="LemmingSpawner/Timer" to="LemmingSpawner" method="_on_timer_timeout"]
