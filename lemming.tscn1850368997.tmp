@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c0arlauc1koa8"]
+
+[ext_resource type="Texture2D" uid="uid://ddux8qo1iqdpo" path="res://icon.svg" id="1_86w6i"]
+[ext_resource type="Script" uid="uid://glckswiwl5do" path="res://lemming.gd" id="1_bs02x"]
+[ext_resource type="Script" uid="uid://bdyoml78tf5ct" path="res://ray_cast_2d.gd" id="2_1qkcv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bs02x"]
+size = Vector2(126, 125)
+
+[node name="Lemming" type="CharacterBody2D" unique_id=1909906124]
+script = ExtResource("1_bs02x")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=862188445]
+scale = Vector2(1.0000001, 1)
+target_position = Vector2(145.99998, 138)
+script = ExtResource("2_1qkcv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=701390423]
+texture = ExtResource("1_86w6i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=514483512]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_bs02x")
+
+[connection signal="stopped_looking" from="RayCast2D" to="." method="_on_ray_cast_2d_stopped_looking"]
