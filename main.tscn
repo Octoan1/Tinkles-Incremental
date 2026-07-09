@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://0p1qsoxpibrv" path="res://Game Logic/lemming_spawner.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://c0arlauc1koa8" path="res://Objects/Lemming/lemming.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://ci8eqs22jrag3" path="res://Game Logic/damage_area.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://ttsgpucekkd3" path="res://UI/ui.gd" id="4_1bvp3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
 size = Vector2(874.5, 311)
@@ -30,5 +31,15 @@ autostart = true
 [node name="CliffDamage" parent="." unique_id=743706955 instance=ExtResource("3_h2yge")]
 position = Vector2(1096, 644)
 scale = Vector2(28.439999, 1)
+insta_kill = true
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1452592837]
+script = ExtResource("4_1bvp3")
+
+[node name="GooLabel" type="Label" parent="UI" unique_id=2044958843]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+metadata/_edit_use_anchors_ = true
 
 [connection signal="timeout" from="LemmingSpawner/Timer" to="LemmingSpawner" method="_on_timer_timeout"]
