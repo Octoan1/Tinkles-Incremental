@@ -20,6 +20,21 @@ config/icon="res://icon.svg"
 gdscript/warnings/untyped_declaration=1
 gdscript/warnings/inferred_declaration=1
 
+[file_customization]
+
+folder_colors={
+"res://Assets/": "red",
+"res://Game Logic/": "orange",
+"res://Objects/": "purple",
+"res://UI/": "green"
+}
+
+[layer_names]
+
+2d_physics/layer_1="Ground"
+2d_physics/layer_2="Lemming"
+2d_physics/layer_3="Building"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

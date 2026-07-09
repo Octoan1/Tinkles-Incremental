@@ -1,14 +1,16 @@
 [gd_scene format=3 uid="uid://c0arlauc1koa8"]
 
 [ext_resource type="Texture2D" uid="uid://ddux8qo1iqdpo" path="res://icon.svg" id="1_86w6i"]
-[ext_resource type="Script" uid="uid://glckswiwl5do" path="res://lemming.gd" id="1_bs02x"]
-[ext_resource type="Script" uid="uid://bdyoml78tf5ct" path="res://ray_cast_2d.gd" id="2_1qkcv"]
+[ext_resource type="Script" uid="uid://glckswiwl5do" path="res://Objects/Lemming/lemming.gd" id="1_bs02x"]
+[ext_resource type="Script" uid="uid://bdyoml78tf5ct" path="res://Objects/Lemming/ray_cast_2d.gd" id="2_1qkcv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bs02x"]
 size = Vector2(126, 125)
 
 [node name="Lemming" type="CharacterBody2D" unique_id=1909906124]
 scale = Vector2(0.14347655, 0.20548184)
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_bs02x")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=862188445]
@@ -24,4 +26,7 @@ texture = ExtResource("1_86w6i")
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_bs02x")
 
+[node name="invuln_timer" type="Timer" parent="." unique_id=278870868]
+
 [connection signal="stopped_looking" from="RayCast2D" to="." method="_on_ray_cast_2d_stopped_looking"]
+[connection signal="timeout" from="invuln_timer" to="." method="_on_invuln_timer_timeout"]
