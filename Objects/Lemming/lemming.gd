@@ -7,7 +7,7 @@ const SPEED = 150.0
 @export var death_value: float = 3.0
 @export var damage_value: float = 1.0
 @export var life_span: float = 30.0
-var traits: Array[String]
+var traits: Array[Trait]
 
 @onready var invuln_timer: Timer = $invuln_timer
 
@@ -17,6 +17,21 @@ var invulnerable: bool = false
 func _ready() -> void:
 	invuln_timer.wait_time = invuln_duration
 	self.velocity.x = SPEED
+
+func add_trait(t: Trait) -> void:
+	print(t, " trait added")
+	# check if trait already exists
+	if traits.has(t):
+		# special case: Fed can be stacked.
+		if t.name != "Fed":
+			return
+	
+	traits.append(t)
+	assign_traits()
+
+func assign_traits() -> void:
+	for t in traits:
+		self.call(t.effect_name)
 
 func take_damage(damage_amount) -> void:
 	if not invulnerable:
@@ -61,3 +76,10 @@ func _on_ray_cast_2d_stopped_looking() -> void:
 
 func _on_invuln_timer_timeout() -> void:
 	invulnerable = false
+
+
+### TRAITS HERE ###
+
+func _fed() -> void:
+	global_scale *= 1.5
+	health *= 2

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Trait" format=3 uid="uid://c3jioqw4s0t18"]
+
+[ext_resource type="Script" uid="uid://bjtvmhml7uq0" path="res://Traits/trait.gd" id="1_r3th0"]
+
+[resource]
+script = ExtResource("1_r3th0")
+name = "Fed"
+effect_name = "_fed"
+metadata/_custom_type_script = "uid://bjtvmhml7uq0"
