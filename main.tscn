@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://byqrbl5ekqen8"]
 
 [ext_resource type="Script" uid="uid://0p1qsoxpibrv" path="res://Game Logic/lemming_spawner.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://fwjhxctb4gix" path="res://Objects/Particle/particle_manager.gd" id="1_lquwl"]
 [ext_resource type="PackedScene" uid="uid://c0arlauc1koa8" path="res://Objects/Lemming/lemming.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://c2cm12b4gs3yf" path="res://Objects/Particle/blood_particle.tscn" id="2_7mycd"]
 [ext_resource type="PackedScene" uid="uid://ci8eqs22jrag3" path="res://Game Logic/damage_area.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://ttsgpucekkd3" path="res://UI/ui.gd" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dlayonr1hr4tv" path="res://Objects/Buildings/buffet.tscn" id="4_lquwl"]
@@ -21,6 +23,10 @@ size = Vector2(31.097046, 22)
 size = Vector2(266, 32)
 
 [node name="Main" type="Node" unique_id=1833770416]
+
+[node name="ParticleManager" type="Node2D" parent="." unique_id=1109907760]
+script = ExtResource("1_lquwl")
+Blood = ExtResource("2_7mycd")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1191487133]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uocab58n6xsf"
-path="res://.godot/imported/lemming_mockup_small.png-be8b9e6c7f339db61c39f77fa4342efe.ctex"
+uid="uid://xhlfacapinxx"
+path="res://.godot/imported/blood_particle.png-a99618c7bbd35d4edfcc3534324f9728.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asesprite/lemming_mockup_small.png"
-dest_files=["res://.godot/imported/lemming_mockup_small.png-be8b9e6c7f339db61c39f77fa4342efe.ctex"]
+source_file="res://Assets/Asesprite/blood_particle.png"
+dest_files=["res://.godot/imported/blood_particle.png-a99618c7bbd35d4edfcc3534324f9728.ctex"]
 
 [params]
 

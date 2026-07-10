@@ -65,6 +65,10 @@ func take_damage(damage_amount) -> void:
 func die() -> void:
 	lemming_cam.enabled = false
 	GameManager.modify_goo(death_value)
+	
+	# testing
+	get_tree().root.get_node("Main").get_node("ParticleManager").spawn_particles(self.global_position)
+	
 	self.queue_free()
 
 func _physics_process(delta: float) -> void:

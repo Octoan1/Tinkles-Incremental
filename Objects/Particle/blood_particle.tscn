@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c2cm12b4gs3yf"]
+
+[ext_resource type="Texture2D" uid="uid://xhlfacapinxx" path="res://Assets/Asesprite/blood_particle.png" id="1_42iko"]
+[ext_resource type="Script" uid="uid://bchsi3sfpyfnn" path="res://Objects/Particle/blood_particle.gd" id="1_c1fgt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_42iko"]
+radius = 3.0
+
+[node name="BloodParticle" type="Area2D" unique_id=1269094331]
+collision_layer = 0
+script = ExtResource("1_c1fgt")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=18546094]
+texture = ExtResource("1_42iko")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1737599413]
+shape = SubResource("CircleShape2D_42iko")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

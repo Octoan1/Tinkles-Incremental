@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://glckswiwl5do" path="res://Objects/Lemming/lemming.gd" id="1_bs02x"]
 [ext_resource type="Script" uid="uid://bdyoml78tf5ct" path="res://Objects/Lemming/ray_cast_2d.gd" id="2_1qkcv"]
-[ext_resource type="Texture2D" uid="uid://uocab58n6xsf" path="res://Asesprite/lemming_mockup_small.png" id="2_4ypp3"]
+[ext_resource type="Texture2D" uid="uid://uocab58n6xsf" path="res://Assets/Asesprite/lemming_mockup_small.png" id="2_4ypp3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bs02x"]
 size = Vector2(35, 48)

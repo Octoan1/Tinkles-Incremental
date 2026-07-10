@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bh8lxeiky1jnu"]
+
+[ext_resource type="Texture2D" uid="uid://xhlfacapinxx" path="res://Assets/Asesprite/blood_particle.png" id="1_slknx"]
+[ext_resource type="Script" uid="uid://8h0kb1mhmjyp" path="res://Objects/Particle/surface.gd" id="2_wkkwd"]
+
+[node name="Surface" type="Sprite2D" unique_id=458917289]
+z_index = 4000
+texture = ExtResource("1_slknx")
+centered = false
+script = ExtResource("2_wkkwd")
