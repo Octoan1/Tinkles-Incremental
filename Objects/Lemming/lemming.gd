@@ -44,6 +44,8 @@ func assign_traits() -> void:
 
 func take_damage(damage_amount) -> void:
 	if not invulnerable:
+		
+		
 		invulnerable = true
 		invuln_timer.start()
 		
@@ -61,6 +63,8 @@ func take_damage(damage_amount) -> void:
 		
 		if health <= 0:
 			die()
+		else:
+			get_tree().root.get_node("Main").get_node("ParticleManager").spawn_damage_particles(self.global_position, damage_amount)
 
 func die() -> void:
 	lemming_cam.enabled = false
