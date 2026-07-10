@@ -7,8 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ci8eqs22jrag3" path="res://Game Logic/damage_area.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://ttsgpucekkd3" path="res://UI/ui.gd" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dlayonr1hr4tv" path="res://Objects/Buildings/buffet.tscn" id="4_lquwl"]
-[ext_resource type="Texture2D" uid="uid://ddux8qo1iqdpo" path="res://icon.svg" id="5_lquwl"]
-[ext_resource type="Script" uid="uid://bqa4pfspwta1p" path="res://crusher.gd" id="6_272bh"]
+[ext_resource type="PackedScene" uid="uid://cfjinxyfp22kg" path="res://Objects/Buildings/crusher.tscn" id="8_5vw27"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
 size = Vector2(1118.25, 634.5)
@@ -18,9 +17,6 @@ size = Vector2(874.5, 311)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
 size = Vector2(31.097046, 22)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
-size = Vector2(266, 32)
 
 [node name="Main" type="Node" unique_id=1833770416]
 
@@ -68,32 +64,7 @@ offset_bottom = 45.0
 theme_override_font_sizes/font_size = 32
 metadata/_edit_use_anchors_ = true
 
-[node name="Crusher" type="Node2D" parent="." unique_id=883489741]
+[node name="Crusher" parent="." unique_id=762803738 instance=ExtResource("8_5vw27")]
 position = Vector2(686, 400)
-script = ExtResource("6_272bh")
-
-[node name="CrusherArm" type="Sprite2D" parent="Crusher" unique_id=1935214704]
-position = Vector2(0, 79.00002)
-scale = Vector2(0.19999921, 1.6399997)
-texture = ExtResource("5_lquwl")
-
-[node name="CrusherTrap" type="Sprite2D" parent="Crusher" unique_id=1124302306]
-scale = Vector2(2.0855603, 0.25597283)
-texture = ExtResource("5_lquwl")
-
-[node name="DamageArea" parent="Crusher" unique_id=1974756608 instance=ExtResource("3_h2yge")]
-damage = 2
-one_shot = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crusher/DamageArea" unique_id=222542845]
-shape = SubResource("RectangleShape2D_5vw27")
-
-[node name="attack_cooldown" type="Timer" parent="Crusher" unique_id=336636168]
-
-[node name="TrapStart" type="Marker2D" parent="Crusher" unique_id=1821655355]
-
-[node name="TrapEnd" type="Marker2D" parent="Crusher" unique_id=1269765883]
-position = Vector2(0, 171)
 
 [connection signal="timeout" from="LemmingSpawner/Timer" to="LemmingSpawner" method="_on_timer_timeout"]
-[connection signal="timeout" from="Crusher/attack_cooldown" to="Crusher" method="_on_attack_cooldown_timeout"]

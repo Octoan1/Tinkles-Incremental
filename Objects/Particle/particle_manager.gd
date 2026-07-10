@@ -22,7 +22,7 @@ func spawn_particles(pos: Vector2) -> void:
 		add_child(blood_instance)
 		
 
-func spawn_damage_particles(pos: Vector2, damage_amount) -> void:
+func spawn_damage_particles(pos: Vector2, damage_amount: float) -> void:
 	var color: Color = Color(randf(), randf(), randf())
 	for i: int in range(DamageParticleCount * damage_amount):
 		var blood_instance : Area2D = Blood.instantiate()
