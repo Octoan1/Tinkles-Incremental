@@ -1,26 +1,28 @@
 [gd_scene format=3 uid="uid://c0arlauc1koa8"]
 
-[ext_resource type="Texture2D" uid="uid://ddux8qo1iqdpo" path="res://icon.svg" id="1_86w6i"]
 [ext_resource type="Script" uid="uid://glckswiwl5do" path="res://Objects/Lemming/lemming.gd" id="1_bs02x"]
 [ext_resource type="Script" uid="uid://bdyoml78tf5ct" path="res://Objects/Lemming/ray_cast_2d.gd" id="2_1qkcv"]
+[ext_resource type="Texture2D" uid="uid://uocab58n6xsf" path="res://Asesprite/lemming_mockup_small.png" id="2_4ypp3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bs02x"]
-size = Vector2(48, 69)
+size = Vector2(35, 48)
 
 [node name="Lemming" type="CharacterBody2D" unique_id=1909906124]
-scale = Vector2(0.14347655, 0.20548184)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_bs02x")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1743721620]
+texture = ExtResource("2_4ypp3")
+
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=862188445]
-position = Vector2(45, 0)
+position = Vector2(15, 0)
 scale = Vector2(1.0000001, 1)
 target_position = Vector2(0, 91)
 script = ExtResource("2_1qkcv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=514483512]
-position = Vector2(2, -10.5)
+position = Vector2(-2.5, 0)
 shape = SubResource("RectangleShape2D_bs02x")
 
 [node name="invuln_timer" type="Timer" parent="." unique_id=278870868]

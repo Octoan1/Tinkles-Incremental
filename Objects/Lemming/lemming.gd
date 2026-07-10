@@ -14,10 +14,11 @@ var traits: Array[String]
 var invuln_duration: float = 0.5
 var invulnerable: bool = false
 
-func _ready():
+func _ready() -> void:
 	invuln_timer.wait_time = invuln_duration
+	self.velocity.x = SPEED
 
-func take_damage(damage_amount):
+func take_damage(damage_amount) -> void:
 	if not invulnerable:
 		invulnerable = true
 		invuln_timer.start()
@@ -46,14 +47,16 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor(): 
 		self.velocity += get_gravity() * 0.1
 	
-	self.velocity.x = SPEED
+	if is_on_floor():
+		self.velocity.x = move_toward(self.velocity.x, SPEED, delta)
 
 	move_and_slide()
 
 
 func _on_ray_cast_2d_stopped_looking() -> void:
 	# jump lemming
-	self.velocity.y -= 1000
+	self.velocity.y -= randf_range(1000, 1400)
+	self.velocity.x += randf_range(100, 400)
 
 
 func _on_invuln_timer_timeout() -> void:
