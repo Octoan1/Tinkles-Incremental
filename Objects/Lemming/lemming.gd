@@ -10,12 +10,21 @@ const SPEED = 150.0
 var traits: Array[Trait]
 
 @onready var invuln_timer: Timer = $invuln_timer
+@onready var lifespan_timer: Timer = $Lifespan
+@onready var lemming_cam: Camera2D = $LemmingCam
+
+@onready var click_timer: Timer = $click_timer
+var click_ready = true
+var some_cam_enabled = false
+
 
 var invuln_duration: float = 0.5
 var invulnerable: bool = false
 
 func _ready() -> void:
 	invuln_timer.wait_time = invuln_duration
+	lifespan_timer.wait_time = life_span
+	lifespan_timer.start()
 	self.velocity.x = SPEED
 
 func add_trait(t: Trait) -> void:
@@ -53,11 +62,13 @@ func take_damage(damage_amount) -> void:
 		if health <= 0:
 			die()
 
-func die():
+func die() -> void:
+	lemming_cam.enabled = false
 	GameManager.modify_goo(death_value)
 	self.queue_free()
 
 func _physics_process(delta: float) -> void:
+	
 	
 	if not is_on_floor(): 
 		self.velocity += get_gravity() * 0.1
@@ -67,19 +78,40 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+func _input_event(_viewport: Viewport, event: InputEvent, _ignore: int) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and click_ready:
+		if lemming_cam.enabled and click_ready:
+			click_ready = false
+			click_timer.start()
+			disable_camera()
+		elif event.pressed and click_ready:
+			click_ready = false
+			click_timer.start()
+			inspect()
+
+func inspect() -> void:
+	get_tree().call_group("Lemming", "disable_camera")
+	lemming_cam.enabled = true
+
+func disable_camera() -> void:
+	lemming_cam.enabled = false
 
 func _on_ray_cast_2d_stopped_looking() -> void:
 	# jump lemming
 	self.velocity.y -= randf_range(1000, 1400)
 	self.velocity.x += randf_range(100, 400)
 
-
 func _on_invuln_timer_timeout() -> void:
 	invulnerable = false
 
+func _on_lifespan_timeout() -> void:
+	die()
+
+func _on_click_timer_timeout() -> void:
+	click_ready = true
+
 
 ### TRAITS HERE ###
-
 func _fed() -> void:
 	global_scale *= 1.5
 	health *= 2

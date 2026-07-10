@@ -7,10 +7,15 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bs02x"]
 size = Vector2(35, 48)
 
-[node name="Lemming" type="CharacterBody2D" unique_id=1909906124]
+[node name="Lemming" type="CharacterBody2D" unique_id=1909906124 groups=["Lemming"]]
 collision_layer = 2
 collision_mask = 5
+input_pickable = true
 script = ExtResource("1_bs02x")
+
+[node name="LemmingCam" type="Camera2D" parent="." unique_id=1992628313]
+enabled = false
+zoom = Vector2(4, 4)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1743721620]
 texture = ExtResource("2_4ypp3")
@@ -27,5 +32,13 @@ shape = SubResource("RectangleShape2D_bs02x")
 
 [node name="invuln_timer" type="Timer" parent="." unique_id=278870868]
 
+[node name="Lifespan" type="Timer" parent="." unique_id=1267265694]
+
+[node name="click_timer" type="Timer" parent="." unique_id=808760983]
+wait_time = 0.1
+
+[connection signal="input_event" from="." to="." method="_input_event"]
 [connection signal="stopped_looking" from="RayCast2D" to="." method="_on_ray_cast_2d_stopped_looking"]
 [connection signal="timeout" from="invuln_timer" to="." method="_on_invuln_timer_timeout"]
+[connection signal="timeout" from="Lifespan" to="." method="_on_lifespan_timeout"]
+[connection signal="timeout" from="click_timer" to="." method="_on_click_timer_timeout"]
