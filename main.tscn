@@ -4,14 +4,24 @@
 [ext_resource type="Script" uid="uid://fwjhxctb4gix" path="res://Objects/Particle/particle_manager.gd" id="1_lquwl"]
 [ext_resource type="PackedScene" uid="uid://c0arlauc1koa8" path="res://Objects/Lemming/lemming.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://c2cm12b4gs3yf" path="res://Objects/Particle/blood_particle.tscn" id="2_7mycd"]
-[ext_resource type="PackedScene" uid="uid://ci8eqs22jrag3" path="res://Game Logic/damage_area.tscn" id="3_h2yge"]
 [ext_resource type="TileSet" uid="uid://cnwjxnnhibpsl" path="res://Assets/tile_set.tres" id="3_kek77"]
 [ext_resource type="Script" uid="uid://ttsgpucekkd3" path="res://UI/ui.gd" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dlayonr1hr4tv" path="res://Objects/Buildings/buffet.tscn" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://cfjinxyfp22kg" path="res://Objects/Buildings/crusher.tscn" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://dn3uct6bpvl42" path="res://Components/hitbox_component.gd" id="9_kek77"]
+[ext_resource type="Script" uid="uid://benf61sjypd5q" path="res://Components/attack.gd" id="10_4c57u"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
-size = Vector2(31.097046, 22)
+[sub_resource type="LabelSettings" id="LabelSettings_4c57u"]
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_efxa6"]
+script = ExtResource("10_4c57u")
+attack_damage = 20.0
+metadata/_custom_type_script = "uid://benf61sjypd5q"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4c57u"]
+size = Vector2(886, 20)
 
 [node name="Main" type="Node" unique_id=1833770416]
 
@@ -34,15 +44,6 @@ scene = ExtResource("2_0xm2m")
 [node name="Timer" type="Timer" parent="LemmingSpawner" unique_id=805387629]
 autostart = true
 
-[node name="CliffDamage" parent="." unique_id=743706955 instance=ExtResource("3_h2yge")]
-position = Vector2(1655, 992)
-scale = Vector2(28.439999, 1)
-insta_kill = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CliffDamage" unique_id=768737055]
-position = Vector2(-5.548527, 1)
-shape = SubResource("RectangleShape2D_lquwl")
-
 [node name="Buffet" parent="." unique_id=241154822 instance=ExtResource("4_lquwl")]
 position = Vector2(322, 520)
 
@@ -54,9 +55,24 @@ offset_left = 6.0
 offset_right = 46.0
 offset_bottom = 45.0
 theme_override_font_sizes/font_size = 32
+text = "null"
+label_settings = SubResource("LabelSettings_4c57u")
 metadata/_edit_use_anchors_ = true
 
 [node name="Crusher" parent="." unique_id=762803738 instance=ExtResource("8_5vw27")]
 position = Vector2(686, 400)
+
+[node name="GroundDamage" type="Area2D" parent="." unique_id=18611825]
+position = Vector2(1318, 1001)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("9_kek77")
+attack = SubResource("Resource_efxa6")
+metadata/_custom_type_script = "uid://dn3uct6bpvl42"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDamage" unique_id=1983048333]
+position = Vector2(174, 0)
+shape = SubResource("RectangleShape2D_4c57u")
+debug_color = Color(1, 0.010942406, 0.057153173, 0.41960785)
 
 [connection signal="timeout" from="LemmingSpawner/Timer" to="LemmingSpawner" method="_on_timer_timeout"]

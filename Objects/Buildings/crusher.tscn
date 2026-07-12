@@ -3,9 +3,16 @@
 [ext_resource type="Script" uid="uid://bqa4pfspwta1p" path="res://crusher.gd" id="1_bo67b"]
 [ext_resource type="Texture2D" uid="uid://ddux8qo1iqdpo" path="res://icon.svg" id="2_b4l58"]
 [ext_resource type="PackedScene" uid="uid://ci8eqs22jrag3" path="res://Game Logic/damage_area.tscn" id="3_muvn6"]
+[ext_resource type="Script" uid="uid://dn3uct6bpvl42" path="res://Components/hitbox_component.gd" id="4_b4l58"]
+[ext_resource type="Script" uid="uid://benf61sjypd5q" path="res://Components/attack.gd" id="5_muvn6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
 size = Vector2(266, 32)
+
+[sub_resource type="Resource" id="Resource_4pc34"]
+script = ExtResource("5_muvn6")
+attack_damage = 1.0
+metadata/_custom_type_script = "uid://benf61sjypd5q"
 
 [node name="Crusher" type="Node2D" unique_id=762803738]
 script = ExtResource("1_bo67b")
@@ -26,6 +33,17 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=83892567]
 shape = SubResource("RectangleShape2D_5vw27")
+
+[node name="HitboxComponent" type="Area2D" parent="DamageArea" unique_id=1230046140]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_b4l58")
+attack = SubResource("Resource_4pc34")
+metadata/_custom_type_script = "uid://dn3uct6bpvl42"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea/HitboxComponent" unique_id=835420673]
+shape = SubResource("RectangleShape2D_5vw27")
+debug_color = Color(0.9987908, 0, 0.14475623, 0.41960785)
 
 [node name="attack_cooldown" type="Timer" parent="." unique_id=412730181]
 

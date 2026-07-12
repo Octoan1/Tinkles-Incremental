@@ -2,7 +2,12 @@
 
 [ext_resource type="Script" uid="uid://glckswiwl5do" path="res://Objects/Lemming/lemming.gd" id="1_bs02x"]
 [ext_resource type="Script" uid="uid://bdyoml78tf5ct" path="res://Objects/Lemming/ray_cast_2d.gd" id="2_1qkcv"]
+[ext_resource type="Script" uid="uid://dxwlmgwyk1wa2" path="res://Components/health_component.gd" id="2_oqybh"]
 [ext_resource type="Texture2D" uid="uid://ckibnigsp561i" path="res://Assets/Asesprite/lemming-Sheet.png" id="4_oqybh"]
+[ext_resource type="Script" uid="uid://1pyaap8o8k26" path="res://Components/hurtbox_component.gd" id="5_gvufl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bs02x"]
+size = Vector2(26, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hqpyc"]
 atlas = ExtResource("4_oqybh")
@@ -52,14 +57,23 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bs02x"]
-size = Vector2(35, 46)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvufl"]
+size = Vector2(24, 41)
 
 [node name="Lemming" type="CharacterBody2D" unique_id=1909906124 groups=["Lemming"]]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 5
 input_pickable = true
 script = ExtResource("1_bs02x")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=439512434]
+script = ExtResource("2_oqybh")
+max_health = 5.0
+metadata/_custom_type_script = "uid://dxwlmgwyk1wa2"
+
+[node name="WorldCollision" type="CollisionShape2D" parent="." unique_id=514483512]
+z_index = 1
+shape = SubResource("RectangleShape2D_bs02x")
 
 [node name="LemmingCam" type="Camera2D" parent="." unique_id=1992628313]
 enabled = false
@@ -67,17 +81,12 @@ zoom = Vector2(4, 4)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=615340767]
 sprite_frames = SubResource("SpriteFrames_4ypp3")
-animation = &"walk"
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=862188445]
 position = Vector2(15, 0)
 scale = Vector2(1.0000001, 1)
 target_position = Vector2(0, 91)
 script = ExtResource("2_1qkcv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=514483512]
-position = Vector2(1, 0)
-shape = SubResource("RectangleShape2D_bs02x")
 
 [node name="invuln_timer" type="Timer" parent="." unique_id=278870868]
 
@@ -86,7 +95,22 @@ shape = SubResource("RectangleShape2D_bs02x")
 [node name="click_timer" type="Timer" parent="." unique_id=808760983]
 wait_time = 0.1
 
+[node name="HurtboxComponent" type="Area2D" parent="." unique_id=701341300 node_paths=PackedStringArray("health_component")]
+z_index = 1
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("5_gvufl")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://1pyaap8o8k26"
+
+[node name="HurtboxShape" type="CollisionShape2D" parent="HurtboxComponent" unique_id=423941072]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_gvufl")
+debug_color = Color(0, 0.6485298, 0.187787, 0.41960785)
+
 [connection signal="input_event" from="." to="." method="_input_event"]
+[connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="stopped_looking" from="RayCast2D" to="." method="_on_ray_cast_2d_stopped_looking"]
 [connection signal="timeout" from="invuln_timer" to="." method="_on_invuln_timer_timeout"]
 [connection signal="timeout" from="Lifespan" to="." method="_on_lifespan_timeout"]
