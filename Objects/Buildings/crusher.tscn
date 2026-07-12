@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cfjinxyfp22kg"]
+
+[ext_resource type="Script" uid="uid://bqa4pfspwta1p" path="res://crusher.gd" id="1_bo67b"]
+[ext_resource type="Texture2D" uid="uid://ddux8qo1iqdpo" path="res://icon.svg" id="2_b4l58"]
+[ext_resource type="PackedScene" uid="uid://ci8eqs22jrag3" path="res://Game Logic/damage_area.tscn" id="3_muvn6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
+size = Vector2(266, 32)
+
+[node name="Crusher" type="Node2D" unique_id=762803738]
+script = ExtResource("1_bo67b")
+
+[node name="CrusherArm" type="Sprite2D" parent="." unique_id=474143854]
+position = Vector2(0, 79.00002)
+scale = Vector2(0.19999921, 1.6399997)
+texture = ExtResource("2_b4l58")
+
+[node name="CrusherTrap" type="Sprite2D" parent="." unique_id=1123141897]
+scale = Vector2(2.0855603, 0.25597283)
+texture = ExtResource("2_b4l58")
+
+[node name="DamageArea" parent="." unique_id=743706955 instance=ExtResource("3_muvn6")]
+damage = 2
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=83892567]
+shape = SubResource("RectangleShape2D_5vw27")
+
+[node name="attack_cooldown" type="Timer" parent="." unique_id=412730181]
+
+[node name="TrapStart" type="Marker2D" parent="." unique_id=672596031]
+
+[node name="TrapEnd" type="Marker2D" parent="." unique_id=1204994029]
+position = Vector2(0, 171)
+
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

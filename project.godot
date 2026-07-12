@@ -39,6 +39,7 @@ folder_colors={
 "res://Assets/": "red",
 "res://Game Logic/": "orange",
 "res://Objects/": "purple",
+"res://Traits/": "yellow",
 "res://UI/": "green"
 }
 

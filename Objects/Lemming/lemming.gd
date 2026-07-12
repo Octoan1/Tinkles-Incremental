@@ -7,7 +7,7 @@ const SPEED = 150.0
 @export var death_value: float = 3.0
 @export var damage_value: float = 1.0
 @export var life_span: float = 30.0
-var traits: Array[String]
+var traits: Array[Trait]
 
 @onready var invuln_timer: Timer = $invuln_timer
 @onready var lifespan_timer: Timer = $Lifespan
@@ -25,10 +25,29 @@ var invulnerable: bool = false
 
 func _ready() -> void:
 	invuln_timer.wait_time = invuln_duration
+	lifespan_timer.wait_time = life_span
+	lifespan_timer.start()
 	self.velocity.x = SPEED
+
+func add_trait(t: Trait) -> void:
+	print(t, " trait added")
+	# check if trait already exists
+	if traits.has(t):
+		# special case: Fed can be stacked.
+		if t.name != "Fed":
+			return
+	
+	traits.append(t)
+	assign_traits()
+
+func assign_traits() -> void:
+	for t in traits:
+		self.call(t.effect_name)
 
 func take_damage(damage_amount) -> void:
 	if not invulnerable:
+		
+		
 		invulnerable = true
 		invuln_timer.start()
 		
@@ -50,7 +69,8 @@ func take_damage(damage_amount) -> void:
 			var pm: Node2D = get_tree().root.get_node("Main").get_node("ParticleManager")
 			pm.call_deferred("spawn_damage_particles", self.global_position, damage_amount)
 
-func die():
+func die() -> void:
+	lemming_cam.enabled = false
 	GameManager.modify_goo(death_value)
 	
 	# testing
@@ -61,6 +81,7 @@ func die():
 func _physics_process(delta: float) -> void:
 	if jumping: 
 		sprite.rotate(3 * delta)
+	
 	
 	if not is_on_floor(): 
 		self.velocity += get_gravity() * 0.1
@@ -77,6 +98,23 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+func _input_event(_viewport: Viewport, event: InputEvent, _ignore: int) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and click_ready:
+		if lemming_cam.enabled and click_ready:
+			click_ready = false
+			click_timer.start()
+			disable_camera()
+		elif event.pressed and click_ready:
+			click_ready = false
+			click_timer.start()
+			inspect()
+
+func inspect() -> void:
+	get_tree().call_group("Lemming", "disable_camera")
+	lemming_cam.enabled = true
+
+func disable_camera() -> void:
+	lemming_cam.enabled = false
 
 func _on_ray_cast_2d_stopped_looking() -> void:
 	# jump lemming
@@ -85,6 +123,17 @@ func _on_ray_cast_2d_stopped_looking() -> void:
 	jumping = true
 	
 
-
 func _on_invuln_timer_timeout() -> void:
 	invulnerable = false
+
+func _on_lifespan_timeout() -> void:
+	die()
+
+func _on_click_timer_timeout() -> void:
+	click_ready = true
+
+
+### TRAITS HERE ###
+func _fed() -> void:
+	global_scale *= 1.5
+	health *= 2
