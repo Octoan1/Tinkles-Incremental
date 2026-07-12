@@ -21,6 +21,7 @@ texture = ExtResource("2_b4l58")
 
 [node name="DamageArea" parent="." unique_id=743706955 instance=ExtResource("3_muvn6")]
 damage = 2
+insta_kill = true
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=83892567]
