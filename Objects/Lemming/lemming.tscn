@@ -2,18 +2,71 @@
 
 [ext_resource type="Script" uid="uid://glckswiwl5do" path="res://Objects/Lemming/lemming.gd" id="1_bs02x"]
 [ext_resource type="Script" uid="uid://bdyoml78tf5ct" path="res://Objects/Lemming/ray_cast_2d.gd" id="2_1qkcv"]
-[ext_resource type="Texture2D" uid="uid://uocab58n6xsf" path="res://Assets/Asesprite/lemming_mockup_small.png" id="2_4ypp3"]
+[ext_resource type="Texture2D" uid="uid://ckibnigsp561i" path="res://Assets/Asesprite/lemming-Sheet.png" id="4_oqybh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqpyc"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ypp3"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(0, 64, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqybh"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(48, 64, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvufl"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(96, 64, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rewew"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(144, 64, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ypp3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqpyc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ypp3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqybh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvufl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rewew")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bs02x"]
-size = Vector2(35, 48)
+size = Vector2(35, 46)
 
 [node name="Lemming" type="CharacterBody2D" unique_id=1909906124]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_bs02x")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1743721620]
-texture = ExtResource("2_4ypp3")
+[node name="LemmingCam" type="Camera2D" parent="." unique_id=1992628313]
+enabled = false
+zoom = Vector2(4, 4)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=615340767]
+sprite_frames = SubResource("SpriteFrames_4ypp3")
+animation = &"walk"
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=862188445]
 position = Vector2(15, 0)
@@ -22,7 +75,7 @@ target_position = Vector2(0, 91)
 script = ExtResource("2_1qkcv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=514483512]
-position = Vector2(-2.5, 0)
+position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_bs02x")
 
 [node name="invuln_timer" type="Timer" parent="." unique_id=278870868]

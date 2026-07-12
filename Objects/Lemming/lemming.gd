@@ -10,6 +10,15 @@ const SPEED = 150.0
 var traits: Array[String]
 
 @onready var invuln_timer: Timer = $invuln_timer
+@onready var lifespan_timer: Timer = $Lifespan
+@onready var lemming_cam: Camera2D = $LemmingCam
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+@onready var click_timer: Timer = $click_timer
+var click_ready = true
+var some_cam_enabled = false
+var jumping: bool = false
+
 
 var invuln_duration: float = 0.5
 var invulnerable: bool = false
@@ -37,6 +46,9 @@ func take_damage(damage_amount) -> void:
 		
 		if health <= 0:
 			die()
+		else:
+			var pm: Node2D = get_tree().root.get_node("Main").get_node("ParticleManager")
+			pm.call_deferred("spawn_damage_particles", self.global_position, damage_amount)
 
 func die():
 	GameManager.modify_goo(death_value)
@@ -47,12 +59,21 @@ func die():
 	self.queue_free()
 
 func _physics_process(delta: float) -> void:
+	if jumping: 
+		sprite.rotate(3 * delta)
 	
 	if not is_on_floor(): 
 		self.velocity += get_gravity() * 0.1
 	
 	if is_on_floor():
 		self.velocity.x = move_toward(self.velocity.x, SPEED, delta)
+
+	if self.velocity.x > 0:
+		sprite.play("walk")
+	else: 
+		sprite.play("default")
+		
+	sprite.flip_h = self.velocity.x < 0
 
 	move_and_slide()
 
@@ -61,6 +82,8 @@ func _on_ray_cast_2d_stopped_looking() -> void:
 	# jump lemming
 	self.velocity.y -= randf_range(1000, 1400)
 	self.velocity.x += randf_range(100, 400)
+	jumping = true
+	
 
 
 func _on_invuln_timer_timeout() -> void:
