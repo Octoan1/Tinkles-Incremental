@@ -68,7 +68,6 @@ zoom = Vector2(4, 4)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=615340767]
 sprite_frames = SubResource("SpriteFrames_4ypp3")
 animation = &"walk"
-frame_progress = 0.3106479
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=862188445]
 position = Vector2(15, 0)

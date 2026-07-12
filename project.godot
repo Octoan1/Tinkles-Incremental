@@ -37,6 +37,7 @@ window/stretch/mode="viewport"
 
 folder_colors={
 "res://Assets/": "red",
+"res://Components/": "gray",
 "res://Game Logic/": "orange",
 "res://Objects/": "purple",
 "res://Traits/": "yellow",
