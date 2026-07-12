@@ -148,7 +148,7 @@ func _on_health_component_died() -> void:
 	GameManager.modify_goo(death_value)
 	
 	# testing
-	get_tree().root.get_node("Main").get_node("ParticleManager").spawn_particles(self.global_position)
+	#get_tree().root.get_node("Main").get_node("ParticleManager").spawn_particles(self.global_position)
 	
 	self.queue_free()
 
