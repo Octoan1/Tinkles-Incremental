@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://db614o4y6ibp5" path="res://Components/States/state_machine.gd" id="6_gvufl"]
 [ext_resource type="Script" uid="uid://dgvoc76qxxet7" path="res://Objects/Lemming/states/idle_state.gd" id="7_rewew"]
 [ext_resource type="Script" uid="uid://blt11y2dpna47" path="res://Objects/Lemming/states/walk_state.gd" id="8_jayy4"]
+[ext_resource type="Script" uid="uid://ccablvye3xlq6" path="res://Objects/Lemming/states/jump_state.gd" id="9_rmnnw"]
+[ext_resource type="Script" uid="uid://bklwrrodqolfp" path="res://Objects/Lemming/states/fall_state.gd" id="10_stssr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bs02x"]
 size = Vector2(27, 46)
@@ -63,6 +65,11 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_stssr"]
+font_size = 21
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Lemming" type="RigidBody2D" unique_id=1702097741 groups=["Lemming"]]
 collision_layer = 2
 collision_mask = 5
@@ -113,18 +120,35 @@ scale = Vector2(1.0000001, 1)
 target_position = Vector2(0, 91)
 script = ExtResource("2_1qkcv")
 
+[node name="SMDebug" type="Label" parent="." unique_id=1426224363]
+offset_left = -39.0
+offset_top = -51.0
+offset_right = 39.0
+offset_bottom = -21.0
+text = "penis"
+label_settings = SubResource("LabelSettings_stssr")
+horizontal_alignment = 1
+
 [node name="StateMachine" type="Node" parent="." unique_id=1900426244 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_gvufl")
+debug_mode = true
 initial_state = NodePath("Walk")
 metadata/_custom_type_script = "uid://db614o4y6ibp5"
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=1389746868]
 script = ExtResource("7_rewew")
 
-[node name="Walk" type="Node" parent="StateMachine" unique_id=1396989003 node_paths=PackedStringArray("entity")]
+[node name="Walk" type="Node" parent="StateMachine" unique_id=1396989003 node_paths=PackedStringArray("jump_state")]
 script = ExtResource("8_jayy4")
-entity = NodePath("../..")
 speed = 200.0
+jump_state = NodePath("../Jump")
+
+[node name="Jump" type="Node" parent="StateMachine" unique_id=943352308 node_paths=PackedStringArray("fall_state")]
+script = ExtResource("9_rmnnw")
+fall_state = NodePath("../Fall")
+
+[node name="Fall" type="Node" parent="StateMachine" unique_id=707930433]
+script = ExtResource("10_stssr")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_input_event"]

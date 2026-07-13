@@ -5,15 +5,14 @@ extends State
 @export_category("Configuration")
 @export var speed: float = 300
 @export_category("Next States")
-@export var jump_state: State
+@export var fall_state: State
+
 
 func enter() -> void:
-	sprite.play("walk")
-
-
+	lemming.lock_rotation = false
+	lemming.apply_impulse(Vector2(100,-400), lemming.global_position + Vector2(-1,0))
+	lemming.angular_velocity = 2
+	
 func physics_update(_delta: float) -> void:
-	lemming.linear_velocity.x = speed
-
-
-func _on_jump_detection_ray_cast_stopped_looking() -> void:
-	switch_state.emit(jump_state)
+	if lemming.linear_velocity.y > 0:
+		switch_state.emit(fall_state)
