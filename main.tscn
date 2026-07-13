@@ -72,6 +72,8 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(691, 183)
 
 [node name="Shop" parent="." unique_id=459058028 instance=ExtResource("9_efxa6")]
+offset_left = 1220.0
+offset_bottom = 702.0
 
 [node name="GroundDamage" type="Area2D" parent="." unique_id=18611825]
 position = Vector2(1339, 207)
