@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Building" format=3 uid="uid://jm7ebs78rc1f"]
+
+[ext_resource type="Texture2D" uid="uid://ddux8qo1iqdpo" path="res://icon.svg" id="1_68o2f"]
+[ext_resource type="Script" uid="uid://dn8p2gkbl7742" path="res://Objects/Buildings/Building.gd" id="1_g4upg"]
+[ext_resource type="PackedScene" uid="uid://dlayonr1hr4tv" path="res://Objects/Buildings/buffet.tscn" id="1_us2ye"]
+
+[resource]
+script = ExtResource("1_g4upg")
+building_name = "Buffet"
+description = "Fattens them up"
+build_price = 15.0
+preview_image = ExtResource("1_68o2f")
+prefab = ExtResource("1_us2ye")
+metadata/_custom_type_script = "uid://dn8p2gkbl7742"

@@ -2,9 +2,7 @@ extends Node
 
 var goo: float = 0.0
 var ui_node: CanvasLayer
-var buildings: Array[PackedScene]
-
-
+var buildings: Array[Building]
 
 func _ready() -> void:
 	var folder_path = "res://Objects/Buildings/"
@@ -16,9 +14,9 @@ func _ready() -> void:
 		
 		var full_path = folder_path + file_name
 		
-		var scene = load(full_path)
-		if scene is PackedScene:
-			buildings.append(scene)
+		var resource = load(full_path)
+		if resource is Building:
+			buildings.append(resource)
 
 func modify_goo(amount):
 	goo += amount
