@@ -8,6 +8,9 @@
 [node name="Buffet" type="Node2D" unique_id=241154822]
 script = ExtResource("1_oxico")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1560569755]
+texture = ExtResource("2_0jko2")
+
 [node name="Area2D" type="Area2D" parent="." unique_id=927927315]
 position = Vector2(-4, 6)
 scale = Vector2(0.725, 6.335)
@@ -16,8 +19,5 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1182417178]
 shape = SubResource("RectangleShape2D_7mycd")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1560569755]
-texture = ExtResource("2_0jko2")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
