@@ -9,8 +9,16 @@ func _ready() -> void:
 	texture_rect.texture = sprite
 
 func _process(delta: float) -> void:
-	var areas = area_2d.get_overlapping_areas()
-	if not areas.is_empty():
+	
+	var tilemap = area_2d.get_overlapping_bodies()
+	if not tilemap.is_empty():
 		emit_signal("valid_placement", true)
 	else:
 		emit_signal("valid_placement", false)
+	
+	
+	#var areas = area_2d.get_overlapping_areas()
+	#if not areas.is_empty():
+		#emit_signal("valid_placement", true)
+	#else:
+		#emit_signal("valid_placement", false)

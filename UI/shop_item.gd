@@ -40,11 +40,16 @@ func _gui_input(event: InputEvent) -> void:
 				# update goo and ui
 				GameManager.modify_goo(-item_price)
 				
-				# currently hardcoded to build the buffet
-				#building = BUFFET.instantiate()
 				building = building_path.instantiate()
 				
-				building.global_position = get_global_mouse_position()
+				var mouse_pos = get_global_mouse_position()
+				var tile_map = get_tree().current_scene.find_child("BuildingPlacement")
+				var tile_coords = tile_map.local_to_map(tile_map.to_local(mouse_pos))
+				var tile_global_pos = tile_map.to_global(tile_map.map_to_local(tile_coords))
+				
+				building.global_position = tile_global_pos
+				
+				#building.global_position = get_global_mouse_position()
 				get_tree().current_scene.add_child(building)
 				
 				print("building purchased!")
