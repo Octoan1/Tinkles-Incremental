@@ -81,5 +81,12 @@ func can_place_building(place: bool) -> void:
 
 # check if lmb is held down, and if the building preview exists
 func _process(delta: float) -> void:
-	if click_holding and is_instance_valid(building_preview):
+	if click_holding and is_instance_valid(building_preview) and can_place:
+			var mouse_pos = get_global_mouse_position()
+			var tile_map = get_tree().current_scene.find_child("BuildingPlacement")
+			var tile_coords = tile_map.local_to_map(tile_map.to_local(mouse_pos))
+			var tile_global_pos = tile_map.to_global(tile_map.map_to_local(tile_coords))
+			
+			building_preview.global_position = tile_global_pos
+	elif click_holding and is_instance_valid(building_preview):
 		building_preview.global_position = get_global_mouse_position()
