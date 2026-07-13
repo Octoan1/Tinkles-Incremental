@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends RigidBody2D
 
 
 
@@ -18,6 +18,7 @@ var traits: Array[Trait]
 var click_ready = true
 var some_cam_enabled = false
 var jumping: bool = false
+var prev_vel: Vector2 = Vector2.ZERO
 
 @onready var health_component: HealthComponent = $HealthComponent
 
@@ -29,7 +30,7 @@ func _ready() -> void:
 	#invuln_timer.wait_time = invuln_duration
 	lifespan_timer.wait_time = life_span
 	lifespan_timer.start()
-	self.velocity.x = SPEED
+	#self.velocity.x = SPEED
 
 func add_trait(t: Trait) -> void:
 	print(t, " trait added")
@@ -46,41 +47,9 @@ func assign_traits() -> void:
 	for t in traits:
 		self.call(t.effect_name)
 
-#func take_damage(damage_amount) -> void:
-	#if not invulnerable:
-		#
-		#
-		#invulnerable = true
-		#invuln_timer.start()
-		#
-		## calculate health_lost
-		#var health_lost = health - damage_amount
-		#if health_lost <= 0:
-			#health_lost = health
-		#else:
-			#health_lost = health - (health - damage_amount)
-		#
-		#var total_goo = health_lost * damage_value
-		#health -= damage_amount
-		#
-		#GameManager.modify_goo(total_goo)
-		#
-		#if health <= 0:
-			#die()
-		#else:
-			#var pm: Node2D = get_tree().root.get_node("Main").get_node("ParticleManager")
-			#pm.call_deferred("spawn_damage_particles", self.global_position, damage_amount)
-
-#func die() -> void:
-	#lemming_cam.enabled = false
-	#GameManager.modify_goo(death_value)
-	#
-	## testing
-	#get_tree().root.get_node("Main").get_node("ParticleManager").spawn_particles(self.global_position)
-	#
-	#self.queue_free()
 
 func _physics_process(delta: float) -> void:
+	prev_vel = linear_velocity
 	if jumping: 
 		sprite.rotate(3 * delta)
 	
@@ -88,21 +57,6 @@ func _physics_process(delta: float) -> void:
 		print("pos: ", self.global_position)
 		print("vel: ", self.velocity)
 		print("health: ", health_component.get_health())
-	
-	if not is_on_floor(): 
-		self.velocity += get_gravity() * 0.1
-	
-	if is_on_floor():
-		self.velocity.x = move_toward(self.velocity.x, SPEED, delta)
-
-	if self.velocity.x > 0:
-		sprite.play("walk")
-	else: 
-		sprite.play("default")
-		
-	sprite.flip_h = self.velocity.x < 0
-
-	move_and_slide()
 
 func _input_event(_viewport: Viewport, event: InputEvent, _ignore: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and click_ready:
@@ -124,8 +78,8 @@ func disable_camera() -> void:
 
 func _on_ray_cast_2d_stopped_looking() -> void:
 	# jump lemming
-	self.velocity.y -= randf_range(1000, 1400)
-	self.velocity.x += randf_range(100, 400)
+	#self.velocity.y -= randf_range(1000, 1400)
+	#self.velocity.x += randf_range(100, 400)
 	jumping = true
 	
 
@@ -173,9 +127,16 @@ func _on_health_component_damaged(attack: Attack) -> void:
 	
 
 # fall damage test
-func _on_hurtbox_component_body_entered(body: Node2D) -> void:
-	print(velocity.length())
-	if velocity.length() > 700:
-		var damage: float = velocity.length() / 100
+#func _on_hurtbox_component_body_entered(body: Node2D) -> void:
+	##print(velocity.length())
+	#if velocity.length() > 700:
+		#var damage: float = velocity.length() / 100
+		#print(damage)
+		#health_component.apply_attack(Attack.new(damage))
+
+
+func _on_body_entered(body: Node) -> void:
+	if prev_vel.length() > 700:
+		var damage: float = prev_vel.length() / 100
 		print(damage)
 		health_component.apply_attack(Attack.new(damage))

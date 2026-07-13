@@ -41,12 +41,11 @@ script = ExtResource("1_lquwl")
 Blood = ExtResource("2_7mycd")
 
 [node name="LemmingSpawner" type="Node2D" parent="." unique_id=779559542]
-position = Vector2(23, 545)
+position = Vector2(32, 580)
 script = ExtResource("1_ig7tw")
 scene = ExtResource("2_0xm2m")
 
 [node name="Timer" type="Timer" parent="LemmingSpawner" unique_id=805387629]
-one_shot = true
 autostart = true
 
 [node name="Buffet" parent="." unique_id=241154822 instance=ExtResource("4_lquwl")]

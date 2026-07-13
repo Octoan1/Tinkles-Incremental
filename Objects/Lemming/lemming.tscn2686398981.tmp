@@ -67,10 +67,10 @@ size = Vector2(24, 41)
 collision_layer = 2
 collision_mask = 5
 input_pickable = true
-lock_rotation = true
-contact_monitor = true
-max_contacts_reported = 4
 script = ExtResource("1_bs02x")
+death_value = null
+damage_value = null
+life_span = null
 
 [node name="HealthComponent" type="Node" parent="." unique_id=439512434]
 script = ExtResource("2_oqybh")
@@ -122,9 +122,8 @@ script = ExtResource("7_rewew")
 
 [node name="Walk" type="Node" parent="StateMachine" unique_id=1396989003 node_paths=PackedStringArray("entity")]
 script = ExtResource("8_jayy4")
-entity = NodePath("../..")
+entity = NodePath("")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_input_event"]
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
