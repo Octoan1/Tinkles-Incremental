@@ -11,4 +11,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var areas = area_2d.get_overlapping_areas()
 	if not areas.is_empty():
-		emit_signal("valid_placement")
+		emit_signal("valid_placement", true)
+	else:
+		emit_signal("valid_placement", false)

@@ -11,7 +11,7 @@ var can_place = false
 @export var building: Node2D
 var building_path: PackedScene
 
-func _input(event: InputEvent) -> void:
+func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		
 		# create the building preview while holding lmb
@@ -31,6 +31,9 @@ func _input(event: InputEvent) -> void:
 		# check when mouse is released
 		elif not event.pressed and click_holding:
 			click_holding = false
+			
+			if is_instance_valid(building_preview) and building_preview.is_connected("valid_placement", can_place_building):
+				building_preview.disconnect("valid_placement", can_place_building)
 			
 			# if the building can be purchased, place it and reset preview
 			if GameManager.goo >= item_price and can_place:
@@ -60,8 +63,8 @@ func _input(event: InputEvent) -> void:
 			can_place = false
 		
 
-func can_place_building() -> void:
-	can_place = true
+func can_place_building(place: bool) -> void:
+	can_place = place
 
 # check if lmb is held down, and if the building preview exists
 func _process(delta: float) -> void:
