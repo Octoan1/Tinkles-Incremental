@@ -2,8 +2,6 @@ extends RigidBody2D
 
 
 
-const SPEED = 150.0
-#@export var health: float = 5.0
 @export var death_value: float = 3.0
 @export var damage_value: float = 1.0
 @export var life_span: float = 30.0
@@ -30,7 +28,6 @@ func _ready() -> void:
 	#invuln_timer.wait_time = invuln_duration
 	lifespan_timer.wait_time = life_span
 	lifespan_timer.start()
-	#self.velocity.x = SPEED
 
 func add_trait(t: Trait) -> void:
 	print(t, " trait added")
@@ -50,12 +47,10 @@ func assign_traits() -> void:
 
 func _physics_process(delta: float) -> void:
 	prev_vel = linear_velocity
-	if jumping: 
-		sprite.rotate(3 * delta)
 	
 	if lemming_cam.enabled:
 		print("pos: ", self.global_position)
-		print("vel: ", self.velocity)
+		print("vel: ", self.linear_velocity)
 		print("health: ", health_component.get_health())
 
 func _input_event(_viewport: Viewport, event: InputEvent, _ignore: int) -> void:
@@ -76,15 +71,7 @@ func inspect() -> void:
 func disable_camera() -> void:
 	lemming_cam.enabled = false
 
-func _on_ray_cast_2d_stopped_looking() -> void:
-	# jump lemming
-	#self.velocity.y -= randf_range(1000, 1400)
-	#self.velocity.x += randf_range(100, 400)
-	jumping = true
-	
 
-#func _on_invuln_timer_timeout() -> void:
-	#invulnerable = false
 
 func _on_lifespan_timeout() -> void:
 	#die()
@@ -125,14 +112,6 @@ func _on_health_component_damaged(attack: Attack) -> void:
 	var pm: Node2D = get_tree().root.get_node("Main").get_node("ParticleManager")
 	pm.call_deferred("spawn_damage_particles", self.global_position, damage_amount)
 	
-
-# fall damage test
-#func _on_hurtbox_component_body_entered(body: Node2D) -> void:
-	##print(velocity.length())
-	#if velocity.length() > 700:
-		#var damage: float = velocity.length() / 100
-		#print(damage)
-		#health_component.apply_attack(Attack.new(damage))
 
 
 func _on_body_entered(body: Node) -> void:

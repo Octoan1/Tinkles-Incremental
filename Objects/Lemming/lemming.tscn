@@ -10,7 +10,10 @@
 [ext_resource type="Script" uid="uid://blt11y2dpna47" path="res://Objects/Lemming/states/walk_state.gd" id="8_jayy4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bs02x"]
-size = Vector2(26, 46)
+size = Vector2(27, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvufl"]
+size = Vector2(24, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hqpyc"]
 atlas = ExtResource("4_oqybh")
@@ -60,9 +63,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvufl"]
-size = Vector2(24, 41)
-
 [node name="Lemming" type="RigidBody2D" unique_id=1702097741 groups=["Lemming"]]
 collision_layer = 2
 collision_mask = 5
@@ -79,25 +79,8 @@ metadata/_custom_type_script = "uid://dxwlmgwyk1wa2"
 
 [node name="WorldCollision" type="CollisionShape2D" parent="." unique_id=514483512]
 z_index = 1
+position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_bs02x")
-
-[node name="LemmingCam" type="Camera2D" parent="." unique_id=1992628313]
-enabled = false
-zoom = Vector2(4, 4)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=615340767]
-sprite_frames = SubResource("SpriteFrames_4ypp3")
-
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=862188445]
-position = Vector2(15, 0)
-scale = Vector2(1.0000001, 1)
-target_position = Vector2(0, 91)
-script = ExtResource("2_1qkcv")
-
-[node name="Lifespan" type="Timer" parent="." unique_id=1267265694]
-
-[node name="click_timer" type="Timer" parent="." unique_id=808760983]
-wait_time = 0.1
 
 [node name="HurtboxComponent" type="Area2D" parent="." unique_id=701341300 node_paths=PackedStringArray("health_component")]
 z_index = 1
@@ -112,6 +95,24 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_gvufl")
 debug_color = Color(0, 0.6485298, 0.187787, 0.41960785)
 
+[node name="LemmingCam" type="Camera2D" parent="." unique_id=1992628313]
+enabled = false
+zoom = Vector2(4, 4)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=615340767]
+sprite_frames = SubResource("SpriteFrames_4ypp3")
+
+[node name="Lifespan" type="Timer" parent="." unique_id=1267265694]
+
+[node name="click_timer" type="Timer" parent="." unique_id=808760983]
+wait_time = 0.1
+
+[node name="JumpDetection" type="RayCast2D" parent="." unique_id=862188445]
+position = Vector2(15, 0)
+scale = Vector2(1.0000001, 1)
+target_position = Vector2(0, 91)
+script = ExtResource("2_1qkcv")
+
 [node name="StateMachine" type="Node" parent="." unique_id=1900426244 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_gvufl")
 initial_state = NodePath("Walk")
@@ -123,11 +124,12 @@ script = ExtResource("7_rewew")
 [node name="Walk" type="Node" parent="StateMachine" unique_id=1396989003 node_paths=PackedStringArray("entity")]
 script = ExtResource("8_jayy4")
 entity = NodePath("../..")
+speed = 200.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_input_event"]
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
-[connection signal="stopped_looking" from="RayCast2D" to="." method="_on_ray_cast_2d_stopped_looking"]
 [connection signal="timeout" from="Lifespan" to="." method="_on_lifespan_timeout"]
 [connection signal="timeout" from="click_timer" to="." method="_on_click_timer_timeout"]
+[connection signal="stopped_looking" from="JumpDetection" to="StateMachine/Walk" method="_on_jump_detection_ray_cast_stopped_looking"]
