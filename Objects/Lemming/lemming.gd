@@ -84,6 +84,10 @@ func _physics_process(delta: float) -> void:
 	if jumping: 
 		sprite.rotate(3 * delta)
 	
+	if lemming_cam.enabled:
+		print("pos: ", self.global_position)
+		print("vel: ", self.velocity)
+		print("health: ", health_component.get_health())
 	
 	if not is_on_floor(): 
 		self.velocity += get_gravity() * 0.1
@@ -139,6 +143,10 @@ func _on_click_timer_timeout() -> void:
 ### TRAITS HERE ###
 func _fed() -> void:
 	global_scale *= 1.5
+	
+	var max_health: float = health_component.get_max_health()
+	health_component.set_max_health(max_health * 2)
+	health_component.reset()
 	#health *= 2
 	#health_component
 
@@ -154,12 +162,20 @@ func _on_health_component_died() -> void:
 
 
 func _on_health_component_damaged(attack: Attack) -> void:
-	var damage_amount = attack.attack_damage
+	var damage_amount: float = attack.attack_damage
 
-	var total_goo = damage_amount * damage_value
+	var total_goo: float = damage_amount * damage_value
 	
 	GameManager.modify_goo(total_goo)
 	
 	var pm: Node2D = get_tree().root.get_node("Main").get_node("ParticleManager")
 	pm.call_deferred("spawn_damage_particles", self.global_position, damage_amount)
 	
+
+# fall damage test
+func _on_hurtbox_component_body_entered(body: Node2D) -> void:
+	print(velocity.length())
+	if velocity.length() > 700:
+		var damage: float = velocity.length() / 100
+		print(damage)
+		health_component.apply_attack(Attack.new(damage))

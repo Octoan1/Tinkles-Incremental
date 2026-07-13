@@ -7,17 +7,20 @@ extends Area2D
 @export var one_shot: bool = false
 
 func _ready():
-	if active == true: self.monitoring = true
-	else: self.monitoring = false
+	#if active == true: self.monitoring = true
+	#else: self.monitoring = false
+	pass
 
 func _physics_process(delta: float) -> void:
-	if active == true and one_shot == false:
-		for body in get_overlapping_bodies():
-			if insta_kill == true:
-				body.die()
-			else:
-				body.take_damage(damage)
+	#if active == true and one_shot == false:
+		#for body in get_overlapping_bodies():
+			#if insta_kill == true:
+				#body.die()
+			#else:
+				#body.take_damage(damage)
+	pass
 
 func _on_body_entered(body: Node2D) -> void:
-	if active == true and one_shot == true:
-		body.take_damage(damage)
+	#if active == true and one_shot == true:
+		#body.take_damage(damage)
+	pass

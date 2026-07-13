@@ -5,6 +5,6 @@ class_name Attack
 @export var knockback_force: float
 
 
-func _init() -> void:
-	attack_damage = 1.0
-	knockback_force = 0.0
+func _init(damage: float = 1.0, knockback: float = 0) -> void:
+	attack_damage = damage
+	knockback_force = knockback
