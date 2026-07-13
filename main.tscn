@@ -13,7 +13,9 @@
 [ext_resource type="Script" uid="uid://benf61sjypd5q" path="res://Components/attack.gd" id="10_4c57u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4c57u"]
-outline_size = 1
+font_size = 64
+font_color = Color(0, 1, 0, 1)
+outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_efxa6"]
@@ -56,10 +58,12 @@ position = Vector2(315, 523)
 script = ExtResource("4_1bvp3")
 
 [node name="GooLabel" type="Label" parent="UI" unique_id=2044958843]
+anchors_preset = -1
+anchor_right = 0.08125
+anchor_bottom = 0.022222223
 offset_left = 6.0
 offset_right = 46.0
 offset_bottom = 45.0
-theme_override_font_sizes/font_size = 32
 text = "null"
 label_settings = SubResource("LabelSettings_4c57u")
 metadata/_edit_use_anchors_ = true

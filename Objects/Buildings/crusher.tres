@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Building" format=3 uid="uid://b8cofyd3ivixy"]
+
+[ext_resource type="Script" uid="uid://dn8p2gkbl7742" path="res://Objects/Buildings/Building.gd" id="1_78jvi"]
+[ext_resource type="PackedScene" uid="uid://cfjinxyfp22kg" path="res://Objects/Buildings/crusher.tscn" id="1_pi62l"]
+[ext_resource type="Texture2D" uid="uid://bypcf1giookoa" path="res://Assets/Asesprite/lemming.png" id="2_b67am"]
+
+[resource]
+script = ExtResource("1_78jvi")
+building_name = "Crusher"
+description = "Cruhses things"
+build_price = 5.0
+preview_image = ExtResource("2_b67am")
+prefab = ExtResource("1_pi62l")
+metadata/_custom_type_script = "uid://dn8p2gkbl7742"

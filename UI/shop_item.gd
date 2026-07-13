@@ -37,12 +37,12 @@ func _gui_input(event: InputEvent) -> void:
 			
 			# if the building can be purchased, place it and reset preview
 			if GameManager.goo >= item_price and can_place:
-				# update goo
-				GameManager.goo -= item_price
+				# update goo and ui
+				GameManager.modify_goo(-item_price)
 				
 				# currently hardcoded to build the buffet
-				building = BUFFET.instantiate()
-				#building = building_path.instantiate()
+				#building = BUFFET.instantiate()
+				building = building_path.instantiate()
 				
 				building.global_position = get_global_mouse_position()
 				get_tree().current_scene.add_child(building)
@@ -53,11 +53,19 @@ func _gui_input(event: InputEvent) -> void:
 					building_preview.queue_free()
 				can_place = false
 				
+			elif not can_place:
+				if is_instance_valid(building_preview):
+					building_preview.queue_free()
+				print("Invalid Placement Location")
 			# if the building cannot be placed, reset preview
+			elif GameManager.goo < item_price:
+				if is_instance_valid(building_preview):
+					building_preview.queue_free()
+				print("Not enough goo!")
 			else:
 				if is_instance_valid(building_preview):
 					building_preview.queue_free()
-				print("building failed to purchase")
+				print("Error. This should not be possible")
 			
 			item_icon.modulate.a = 1.0
 			can_place = false
