@@ -57,6 +57,8 @@ mb_left={
 2d_physics/layer_1="Ground"
 2d_physics/layer_2="Lemming"
 2d_physics/layer_3="Building"
+2d_physics/layer_4="Valid Placement"
+2d_physics/layer_5="Building Placement"
 
 [physics]
 

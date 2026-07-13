@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ttsgpucekkd3" path="res://UI/ui.gd" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dlayonr1hr4tv" path="res://Objects/Buildings/buffet.tscn" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://cfjinxyfp22kg" path="res://Objects/Buildings/crusher.tscn" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://b3sy11wbwvqva" path="res://UI/shop.tscn" id="9_efxa6"]
 [ext_resource type="Script" uid="uid://dn3uct6bpvl42" path="res://Components/hitbox_component.gd" id="9_kek77"]
 [ext_resource type="Script" uid="uid://benf61sjypd5q" path="res://Components/attack.gd" id="10_4c57u"]
 
@@ -22,6 +23,9 @@ metadata/_custom_type_script = "uid://benf61sjypd5q"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4c57u"]
 size = Vector2(886, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efxa6"]
+size = Vector2(1053.5, 73.5)
 
 [node name="Main" type="Node" unique_id=1833770416]
 
@@ -62,6 +66,8 @@ metadata/_edit_use_anchors_ = true
 [node name="Crusher" parent="." unique_id=762803738 instance=ExtResource("8_5vw27")]
 position = Vector2(686, 400)
 
+[node name="Shop" parent="." unique_id=459058028 instance=ExtResource("9_efxa6")]
+
 [node name="GroundDamage" type="Area2D" parent="." unique_id=18611825]
 position = Vector2(1318, 1001)
 collision_layer = 4
@@ -74,5 +80,13 @@ metadata/_custom_type_script = "uid://dn3uct6bpvl42"
 position = Vector2(174, 0)
 shape = SubResource("RectangleShape2D_4c57u")
 debug_color = Color(1, 0.010942406, 0.057153173, 0.41960785)
+
+[node name="ValidPlacementArea" type="Area2D" parent="." unique_id=2032836884]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ValidPlacementArea" unique_id=2087504089]
+position = Vector2(525.75, 552.75)
+shape = SubResource("RectangleShape2D_efxa6")
 
 [connection signal="timeout" from="LemmingSpawner/Timer" to="LemmingSpawner" method="_on_timer_timeout"]

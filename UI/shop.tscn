@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://b3sy11wbwvqva"]
+
+[ext_resource type="Script" uid="uid://dglqns8u7alin" path="res://UI/shop.gd" id="1_ajbpu"]
+[ext_resource type="PackedScene" uid="uid://byw00vpoqkdyb" path="res://UI/shop_item.tscn" id="2_ajbpu"]
+
+[node name="Shop" type="Control" unique_id=459058028]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_ajbpu")
+
+[node name="Panel" type="Panel" parent="." unique_id=364727084]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -700.0
+offset_bottom = 700.0
+grow_horizontal = 0
+
+[node name="ShopLabel" type="Label" parent="Panel" unique_id=1372291455]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -86.5
+offset_top = 6.0
+offset_right = 86.5
+offset_bottom = 94.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "SHOP"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel" unique_id=1603964715]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -600.0
+offset_right = 700.0
+grow_vertical = 0
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer" unique_id=401179770]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxRow1" type="HBoxContainer" parent="Panel/ScrollContainer/VBoxContainer" unique_id=225520623]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ShopItem" parent="Panel/ScrollContainer/VBoxContainer/HBoxRow1" unique_id=1436335752 instance=ExtResource("2_ajbpu")]
+layout_mode = 2
+
+[node name="ShopItem2" parent="Panel/ScrollContainer/VBoxContainer/HBoxRow1" unique_id=1486136251 instance=ExtResource("2_ajbpu")]
+layout_mode = 2
+
+[node name="HBoxRow2" type="HBoxContainer" parent="Panel/ScrollContainer/VBoxContainer" unique_id=358707674]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ShopItem" parent="Panel/ScrollContainer/VBoxContainer/HBoxRow2" unique_id=1525384874 instance=ExtResource("2_ajbpu")]
+layout_mode = 2
+
+[node name="ShopItem2" parent="Panel/ScrollContainer/VBoxContainer/HBoxRow2" unique_id=1447977822 instance=ExtResource("2_ajbpu")]
+layout_mode = 2
+
+[node name="HBoxRow3" type="HBoxContainer" parent="Panel/ScrollContainer/VBoxContainer" unique_id=1507378746]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ShopItem" parent="Panel/ScrollContainer/VBoxContainer/HBoxRow3" unique_id=639220903 instance=ExtResource("2_ajbpu")]
+layout_mode = 2
+
+[node name="ShopItem2" parent="Panel/ScrollContainer/VBoxContainer/HBoxRow3" unique_id=127386152 instance=ExtResource("2_ajbpu")]
+layout_mode = 2
+
+[node name="HBoxRow4" type="HBoxContainer" parent="Panel/ScrollContainer/VBoxContainer" unique_id=1663498042]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ShopItem" parent="Panel/ScrollContainer/VBoxContainer/HBoxRow4" unique_id=1467937217 instance=ExtResource("2_ajbpu")]
+layout_mode = 2
+
+[node name="ShopItem2" parent="Panel/ScrollContainer/VBoxContainer/HBoxRow4" unique_id=317560338 instance=ExtResource("2_ajbpu")]
+layout_mode = 2

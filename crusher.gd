@@ -7,6 +7,7 @@ extends Node2D
 @onready var crusher_trap: Sprite2D = $CrusherTrap
 @onready var trap_start: Marker2D = $TrapStart
 @onready var trap_end: Marker2D = $TrapEnd
+var price = 10.0
 
 
 var attacking = false

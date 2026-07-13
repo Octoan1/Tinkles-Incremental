@@ -6,4 +6,5 @@
 script = ExtResource("1_r3th0")
 name = "Fed"
 effect_name = "_fed"
+stackable = true
 metadata/_custom_type_script = "uid://bjtvmhml7uq0"

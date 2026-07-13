@@ -35,8 +35,8 @@ func add_trait(t: Trait) -> void:
 	print(t, " trait added")
 	# check if trait already exists
 	if traits.has(t):
-		# special case: Fed can be stacked.
-		if t.name != "Fed":
+		# special case: don't add trait if it is not stackable.
+		if not t.stackable:
 			return
 	
 	traits.append(t)
