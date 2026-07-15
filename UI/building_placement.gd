@@ -8,8 +8,8 @@ signal valid_placement
 func _ready() -> void:
 	texture_rect.texture = sprite
 
-func _process(delta: float) -> void:
-	var areas = area_2d.get_overlapping_areas()
+func _process(_delta: float) -> void:
+	var areas: Array[Area2D] = area_2d.get_overlapping_areas()
 	if not areas.is_empty():
 		emit_signal("valid_placement", true)
 	else:

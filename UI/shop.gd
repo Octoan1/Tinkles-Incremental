@@ -2,7 +2,7 @@ extends Control
 
 @onready var v_box_container: VBoxContainer = $Panel/ScrollContainer/VBoxContainer
 #const BUILDING_PLACEMENT = preload("uid://fjg6m8jxharl")
-const SHOP_ITEM = preload("uid://byw00vpoqkdyb")
+const SHOP_ITEM: Resource = preload("uid://byw00vpoqkdyb")
 
 
 var shop_items: Array[Panel]
@@ -15,7 +15,7 @@ func populate_shop() -> void:
 	
 	var h_box: HBoxContainer
 	
-	for i in GameManager.buildings.size():
+	for i: int in GameManager.buildings.size():
 		
 		# dynamically create an new hbox whenever a row of size 2 is full
 		if i % 2 == 0:
@@ -29,8 +29,8 @@ func populate_shop() -> void:
 		
 		
 		# instantiate the item
-		var item = SHOP_ITEM.instantiate()
-		var building = GameManager.buildings[i]
+		var item: Node = SHOP_ITEM.instantiate() # wrong type?
+		var building: Building = GameManager.buildings[i]
 		item.get_node("PriceLabel").text = str(building.build_price) + " Goo"
 		item.get_node("ItemIcon").texture = building.preview_image
 		item.item_price = building.build_price
@@ -56,7 +56,7 @@ func populate_shop() -> void:
 
 func access_items() -> void:
 	shop_items = []
-	for row in v_box_container.get_children():
-		for shop_item in row.get_children():
+	for row: Node in v_box_container.get_children():
+		for shop_item: Node in row.get_children():
 			shop_items.append(shop_item)
 			
