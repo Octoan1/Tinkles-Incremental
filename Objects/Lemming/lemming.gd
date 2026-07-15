@@ -13,8 +13,8 @@ var traits: Array[Trait]
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 @onready var click_timer: Timer = $click_timer
-var click_ready: bool = true
-var some_cam_enabled: bool = false
+var click_ready = true
+var some_cam_enabled = false
 var jumping: bool = false
 var prev_vel: Vector2 = Vector2.ZERO
 
@@ -41,11 +41,11 @@ func add_trait(t: Trait) -> void:
 	assign_traits()
 
 func assign_traits() -> void:
-	for t: Trait in traits:
+	for t in traits:
 		self.call(t.effect_name)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	prev_vel = linear_velocity
 	
 	if lemming_cam.enabled:
@@ -114,7 +114,7 @@ func _on_health_component_damaged(attack: Attack) -> void:
 	
 
 
-func _on_body_entered(_body: Node) -> void:
+func _on_body_entered(body: Node) -> void:
 	if prev_vel.length() > 700:
 		var damage: float = prev_vel.length() / 100
 		print(damage)
