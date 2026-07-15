@@ -27,7 +27,7 @@ func populate_shop() -> void:
 			v_box_container.add_child(h_box)
 			
 		
-		
+		# test #2
 		# instantiate the item
 		var item = SHOP_ITEM.instantiate()
 		var building = GameManager.buildings[i]
