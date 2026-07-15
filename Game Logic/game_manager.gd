@@ -1,5 +1,6 @@
 extends Node
 
+# added to fix git changes
 var goo: float = 0.0
 var ui_node: CanvasLayer
 var buildings: Array[Building]
