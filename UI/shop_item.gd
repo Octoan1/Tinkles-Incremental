@@ -1,12 +1,12 @@
 extends Panel
-const BUILDING_PLACEMENT = preload("uid://fjg6m8jxharl")
+const BUILDING_PLACEMENT: Resource = preload("uid://fjg6m8jxharl")
 @onready var item_icon: TextureRect = $ItemIcon
-const BUFFET = preload("uid://dlayonr1hr4tv")
+const BUFFET: Resource = preload("uid://dlayonr1hr4tv")
 
 
 var building_preview: Node2D
-var click_holding = false
-var can_place = false
+var click_holding: bool = false
+var can_place: bool = false
 @export var item_price: float = 0.0
 @export var building: Node2D
 var building_path: PackedScene
