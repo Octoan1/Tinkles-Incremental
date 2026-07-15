@@ -5,19 +5,19 @@ var ui_node: CanvasLayer
 var buildings: Array[Building]
 
 func _ready() -> void:
-	var folder_path: String = "res://Objects/Buildings/"
-	var files: PackedStringArray = DirAccess.get_files_at(folder_path)
+	var folder_path = "res://Objects/Buildings/"
+	var files = DirAccess.get_files_at(folder_path)
 	
-	for file_name: String in files:
+	for file_name in files:
 		if file_name.ends_with(".import") or file_name.ends_with(".remap"):
 			continue
 		
-		var full_path: String = folder_path + file_name
+		var full_path = folder_path + file_name
 		
-		var resource: Resource = load(full_path)
+		var resource = load(full_path)
 		if resource is Building:
 			buildings.append(resource)
 
-func modify_goo(amount: float) -> void:
+func modify_goo(amount):
 	goo += amount
 	ui_node.update_ui()

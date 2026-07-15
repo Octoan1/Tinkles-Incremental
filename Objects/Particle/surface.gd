@@ -15,9 +15,7 @@ func _ready() -> void:
 	surface_image.fill(Color(0,0,0,0))
 	
 	#Load our blood image, make sure formats match
-	#var blood_image_tex: ImageTexture = load("res://Assets/Asesprite/blood_particle.png")
-	blood_image = Image.load_from_file("res://Assets/Asesprite/blood_particle.png")
-	
+	blood_image.load("res://Assets/Asesprite/blood_particle.png")
 	blood_image.convert(Image.FORMAT_RGBA8)
 	blood_size = blood_image.get_size()
 	

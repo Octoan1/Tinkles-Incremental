@@ -2,9 +2,9 @@ extends CanvasLayer
 
 @onready var goo_label: Label = $GooLabel
 
-func _ready() -> void:
+func _ready():
 	goo_label.text = "Goo: " + str(GameManager.goo)
 	GameManager.ui_node = self
 
-func update_ui() -> void:
+func update_ui():
 	goo_label.text = "Goo: " + str(GameManager.goo)
