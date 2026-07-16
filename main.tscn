@@ -10,21 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dlayonr1hr4tv" path="res://Objects/Buildings/buffet.tscn" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://cfjinxyfp22kg" path="res://Objects/Buildings/crusher.tscn" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://b3sy11wbwvqva" path="res://UI/shop.tscn" id="9_efxa6"]
-[ext_resource type="Script" uid="uid://dn3uct6bpvl42" path="res://Components/hitbox_component.gd" id="9_kek77"]
-[ext_resource type="Script" uid="uid://benf61sjypd5q" path="res://Components/attack.gd" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://thnljogxdm0p" path="res://Assets/Asesprite/tile_atlas.png" id="12_dg77c"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ycdy4"]
-texture = ExtResource("12_dg77c")
-texture_region_size = Vector2i(32, 32)
-7:7/0 = 0
-7:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-
-[sub_resource type="TileSet" id="TileSet_w48qg"]
-tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 8
-physics_layer_0/collision_mask = 16
-sources/0 = SubResource("TileSetAtlasSource_ycdy4")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4c57u"]
 texture = ExtResource("2_4c57u")
@@ -49,6 +35,18 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_dg77c"]
 tile_size = Vector2i(32, 32)
 sources/2 = SubResource("TileSetAtlasSource_4c57u")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ycdy4"]
+texture = ExtResource("12_dg77c")
+texture_region_size = Vector2i(32, 32)
+7:7/0 = 0
+7:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_w48qg"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 8
+physics_layer_0/collision_mask = 16
+sources/0 = SubResource("TileSetAtlasSource_ycdy4")
 
 [sub_resource type="LabelSettings" id="LabelSettings_4c57u"]
 font_size = 64
