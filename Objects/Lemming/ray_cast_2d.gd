@@ -5,7 +5,7 @@ signal stopped_looking()
 
 var wasLooking : bool = false
 func _process(_delta: float) -> void:
-	var collider := get_collider()
+	var collider: Object = get_collider()
 	if collider:
 		wasLooking = true
 		var new_target : Node = collider.get_owner()

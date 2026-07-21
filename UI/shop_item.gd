@@ -1,12 +1,12 @@
 extends Panel
-const BUILDING_PLACEMENT = preload("uid://fjg6m8jxharl")
+const BUILDING_PLACEMENT: Resource = preload("uid://fjg6m8jxharl")
 @onready var item_icon: TextureRect = $ItemIcon
-const BUFFET = preload("uid://dlayonr1hr4tv")
+const BUFFET: Resource = preload("uid://dlayonr1hr4tv")
 
 
 var building_preview: Node2D
-var click_holding = false
-var can_place = false
+var click_holding: bool = false
+var can_place: bool = false
 @export var item_price: float = 0.0
 @export var building: Node2D
 var building_path: PackedScene
@@ -40,11 +40,16 @@ func _gui_input(event: InputEvent) -> void:
 				# update goo and ui
 				GameManager.modify_goo(-item_price)
 				
-				# currently hardcoded to build the buffet
-				#building = BUFFET.instantiate()
 				building = building_path.instantiate()
 				
-				building.global_position = get_global_mouse_position()
+				var mouse_pos: Vector2 = get_global_mouse_position()
+				var tile_map: TileMapLayer = get_tree().current_scene.find_child("BuildingPlacement")
+				var tile_coords: Vector2 = tile_map.local_to_map(tile_map.to_local(mouse_pos))
+				var tile_global_pos: Vector2 = tile_map.to_global(tile_map.map_to_local(tile_coords))
+				
+				building.global_position = tile_global_pos
+				
+				#building.global_position = get_global_mouse_position()
 				get_tree().current_scene.add_child(building)
 				
 				print("building purchased!")
@@ -75,6 +80,13 @@ func can_place_building(place: bool) -> void:
 	can_place = place
 
 # check if lmb is held down, and if the building preview exists
-func _process(delta: float) -> void:
-	if click_holding and is_instance_valid(building_preview):
+func _process(_delta: float) -> void:
+	if click_holding and is_instance_valid(building_preview) and can_place:
+			var mouse_pos: Vector2 = get_global_mouse_position()
+			var tile_map: TileMapLayer = get_tree().current_scene.find_child("BuildingPlacement")
+			var tile_coords: Vector2 = tile_map.local_to_map(tile_map.to_local(mouse_pos))
+			var tile_global_pos: Vector2 = tile_map.to_global(tile_map.map_to_local(tile_coords))
+			
+			building_preview.global_position = tile_global_pos
+	elif click_holding and is_instance_valid(building_preview):
 		building_preview.global_position = get_global_mouse_position()
