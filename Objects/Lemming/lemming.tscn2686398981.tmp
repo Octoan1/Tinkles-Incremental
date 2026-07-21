@@ -8,14 +8,9 @@
 [ext_resource type="Script" uid="uid://db614o4y6ibp5" path="res://Components/States/state_machine.gd" id="6_gvufl"]
 [ext_resource type="Script" uid="uid://dgvoc76qxxet7" path="res://Objects/Lemming/states/idle_state.gd" id="7_rewew"]
 [ext_resource type="Script" uid="uid://blt11y2dpna47" path="res://Objects/Lemming/states/walk_state.gd" id="8_jayy4"]
-[ext_resource type="Script" uid="uid://ccablvye3xlq6" path="res://Objects/Lemming/states/jump_state.gd" id="9_rmnnw"]
-[ext_resource type="Script" uid="uid://bklwrrodqolfp" path="res://Objects/Lemming/states/fall_state.gd" id="10_stssr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bs02x"]
-size = Vector2(27, 46)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvufl"]
-size = Vector2(24, 41)
+size = Vector2(26, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hqpyc"]
 atlas = ExtResource("4_oqybh")
@@ -65,19 +60,17 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="LabelSettings" id="LabelSettings_stssr"]
-font_size = 21
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvufl"]
+size = Vector2(24, 41)
 
 [node name="Lemming" type="RigidBody2D" unique_id=1702097741 groups=["Lemming"]]
 collision_layer = 2
 collision_mask = 5
 input_pickable = true
-lock_rotation = true
-contact_monitor = true
-max_contacts_reported = 4
 script = ExtResource("1_bs02x")
+death_value = null
+damage_value = null
+life_span = null
 
 [node name="HealthComponent" type="Node" parent="." unique_id=439512434]
 script = ExtResource("2_oqybh")
@@ -86,8 +79,25 @@ metadata/_custom_type_script = "uid://dxwlmgwyk1wa2"
 
 [node name="WorldCollision" type="CollisionShape2D" parent="." unique_id=514483512]
 z_index = 1
-position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_bs02x")
+
+[node name="LemmingCam" type="Camera2D" parent="." unique_id=1992628313]
+enabled = false
+zoom = Vector2(4, 4)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=615340767]
+sprite_frames = SubResource("SpriteFrames_4ypp3")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=862188445]
+position = Vector2(15, 0)
+scale = Vector2(1.0000001, 1)
+target_position = Vector2(0, 91)
+script = ExtResource("2_1qkcv")
+
+[node name="Lifespan" type="Timer" parent="." unique_id=1267265694]
+
+[node name="click_timer" type="Timer" parent="." unique_id=808760983]
+wait_time = 0.1
 
 [node name="HurtboxComponent" type="Area2D" parent="." unique_id=701341300 node_paths=PackedStringArray("health_component")]
 z_index = 1
@@ -102,58 +112,21 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_gvufl")
 debug_color = Color(0, 0.6485298, 0.187787, 0.41960785)
 
-[node name="LemmingCam" type="Camera2D" parent="." unique_id=1992628313]
-enabled = false
-zoom = Vector2(4, 4)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=615340767]
-sprite_frames = SubResource("SpriteFrames_4ypp3")
-
-[node name="Lifespan" type="Timer" parent="." unique_id=1267265694]
-
-[node name="click_timer" type="Timer" parent="." unique_id=808760983]
-wait_time = 0.1
-
-[node name="JumpDetection" type="RayCast2D" parent="." unique_id=862188445]
-position = Vector2(15, 0)
-scale = Vector2(1.0000001, 1)
-target_position = Vector2(0, 91)
-script = ExtResource("2_1qkcv")
-
-[node name="SMDebug" type="Label" parent="." unique_id=1426224363]
-offset_left = -39.0
-offset_top = -51.0
-offset_right = 39.0
-offset_bottom = -21.0
-text = "penis"
-label_settings = SubResource("LabelSettings_stssr")
-horizontal_alignment = 1
-
 [node name="StateMachine" type="Node" parent="." unique_id=1900426244 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_gvufl")
-debug_mode = true
 initial_state = NodePath("Walk")
 metadata/_custom_type_script = "uid://db614o4y6ibp5"
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=1389746868]
 script = ExtResource("7_rewew")
 
-[node name="Walk" type="Node" parent="StateMachine" unique_id=1396989003 node_paths=PackedStringArray("jump_state")]
+[node name="Walk" type="Node" parent="StateMachine" unique_id=1396989003 node_paths=PackedStringArray("entity")]
 script = ExtResource("8_jayy4")
-speed = 200.0
-jump_state = NodePath("../Jump")
+entity = NodePath("")
 
-[node name="Jump" type="Node" parent="StateMachine" unique_id=943352308 node_paths=PackedStringArray("fall_state")]
-script = ExtResource("9_rmnnw")
-fall_state = NodePath("../Fall")
-
-[node name="Fall" type="Node" parent="StateMachine" unique_id=707930433]
-script = ExtResource("10_stssr")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_input_event"]
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="stopped_looking" from="RayCast2D" to="." method="_on_ray_cast_2d_stopped_looking"]
 [connection signal="timeout" from="Lifespan" to="." method="_on_lifespan_timeout"]
 [connection signal="timeout" from="click_timer" to="." method="_on_click_timer_timeout"]
-[connection signal="stopped_looking" from="JumpDetection" to="StateMachine/Walk" method="_on_jump_detection_ray_cast_stopped_looking"]

@@ -4,15 +4,15 @@ extends Node2D
 var sprite: Texture2D
 @onready var area_2d: Area2D = $Area2D
 signal valid_placement
-var placement = false
-var old_placement = true
+var placement: bool = false
+var old_placement: bool = true
 
 func _ready() -> void:
 	texture_rect.texture = sprite
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
-	var tilemap = area_2d.get_overlapping_bodies()
+	var tilemap: Array[Node2D] = area_2d.get_overlapping_bodies()
 	if not tilemap.is_empty() and old_placement == false:
 		texture_rect.modulate = Color(0,1,0)
 		emit_signal("valid_placement", true)

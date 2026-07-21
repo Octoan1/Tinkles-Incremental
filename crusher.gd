@@ -7,12 +7,12 @@ extends Node2D
 @onready var crusher_trap: Sprite2D = $CrusherTrap
 @onready var trap_start: Marker2D = $TrapStart
 @onready var trap_end: Marker2D = $TrapEnd
-var price = 10.0
+var price: float = 10.0
 
 
-var attacking = false
-var resetting = false
-var trap_speed = 500
+var attacking: bool = false
+var resetting: bool = false
+var trap_speed: float = 500
 
 func _ready() -> void:
 	attack_cooldown_timer.start()
