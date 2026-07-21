@@ -4,6 +4,7 @@ extends Node
 var goo: float = 0.0
 var ui_node: CanvasLayer
 var buildings: Array[Building]
+var shop_node: Control
 
 func _ready() -> void:
 	var folder_path: String = "res://Objects/Buildings/"
@@ -22,3 +23,6 @@ func _ready() -> void:
 func modify_goo(amount: float) -> void:
 	goo += amount
 	ui_node.update_ui()
+
+func update_shop() -> void:
+	shop_node.update_shop()

@@ -6,3 +6,4 @@ class_name Building
 @export var build_price: float
 @export var preview_image: Texture2D
 @export var prefab: PackedScene
+@export var purchased: bool = false

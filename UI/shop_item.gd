@@ -10,12 +10,13 @@ var can_place: bool = false
 @export var item_price: float = 0.0
 @export var building: Node2D
 var building_path: PackedScene
+var building_res: Building
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		
 		# create the building preview while holding lmb
-		if event.pressed and not click_holding:
+		if event.pressed and not click_holding and not building_res.purchased:
 			click_holding = true
 			
 			building_preview = BUILDING_PLACEMENT.instantiate()
@@ -36,7 +37,7 @@ func _gui_input(event: InputEvent) -> void:
 				building_preview.disconnect("valid_placement", can_place_building)
 			
 			# if the building can be purchased, place it and reset preview
-			if GameManager.goo >= item_price and can_place:
+			if GameManager.goo >= item_price and can_place and not building_res.purchased:
 				# update goo and ui
 				GameManager.modify_goo(-item_price)
 				
@@ -54,9 +55,16 @@ func _gui_input(event: InputEvent) -> void:
 				
 				print("building purchased!")
 				
+				
+				
 				if is_instance_valid(building_preview):
 					building_preview.queue_free()
 				can_place = false
+				
+				# might need to update it in the game manager, but updating the res should work
+				#GameManager.buildings[GameManager.buildings.find(building_res)].purchased = true
+				building_res.purchased = true
+				GameManager.update_shop()
 				
 			elif not can_place:
 				if is_instance_valid(building_preview):
@@ -74,6 +82,7 @@ func _gui_input(event: InputEvent) -> void:
 			
 			item_icon.modulate.a = 1.0
 			can_place = false
+		
 		
 
 func can_place_building(place: bool) -> void:
