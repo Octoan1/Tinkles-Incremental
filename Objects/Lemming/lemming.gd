@@ -53,16 +53,16 @@ func _physics_process(_delta: float) -> void:
 		print("vel: ", self.linear_velocity)
 		print("health: ", health_component.get_health())
 
-func _input_event(_viewport: Viewport, event: InputEvent, _ignore: int) -> void:
+func _on_click_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and click_ready:
 		if lemming_cam.enabled and click_ready:
 			click_ready = false
 			click_timer.start()
 			disable_camera()
 		elif event.pressed and click_ready:
-			click_ready = false
-			click_timer.start()
-			inspect()
+				click_ready = false
+				click_timer.start()
+				inspect()
 
 func inspect() -> void:
 	get_tree().call_group("Lemming", "disable_camera")

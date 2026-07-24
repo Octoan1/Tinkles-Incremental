@@ -70,6 +70,9 @@ font_size = 21
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_stssr"]
+radius = 35.0
+
 [node name="Lemming" type="RigidBody2D" unique_id=1702097741 groups=["Lemming"]]
 collision_layer = 2
 collision_mask = 5
@@ -150,6 +153,14 @@ fall_state = NodePath("../Fall")
 [node name="Fall" type="Node" parent="StateMachine" unique_id=707930433]
 script = ExtResource("10_stssr")
 
+[node name="ClickArea" type="Area2D" parent="." unique_id=185673943]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=614034452]
+shape = SubResource("CircleShape2D_stssr")
+debug_color = Color(0.3180198, 0.31801978, 0.31801975, 0.41960785)
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_input_event"]
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
@@ -157,3 +168,4 @@ script = ExtResource("10_stssr")
 [connection signal="timeout" from="Lifespan" to="." method="_on_lifespan_timeout"]
 [connection signal="timeout" from="click_timer" to="." method="_on_click_timer_timeout"]
 [connection signal="stopped_looking" from="JumpDetection" to="StateMachine/Walk" method="_on_jump_detection_ray_cast_stopped_looking"]
+[connection signal="input_event" from="ClickArea" to="." method="_on_click_area_input_event"]
