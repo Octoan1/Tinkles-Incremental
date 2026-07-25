@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cdlih2j28coob"]
+
+[ext_resource type="Script" uid="uid://c8umkx3wtitxx" path="res://UI/Talent Screen/talent_button.gd" id="1_b01a5"]
+
+[node name="TalentButton" type="Button" unique_id=236319619]
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 32
+keep_pressed_outside = true
+text = "press"
+script = ExtResource("1_b01a5")

@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://b6lhapq0sktbs"]
+
+[ext_resource type="Script" uid="uid://d27dm3p6g047y" path="res://UI/Talent Screen/talent_screen.gd" id="1_h6pdl"]
+[ext_resource type="PackedScene" uid="uid://cdlih2j28coob" path="res://UI/Talent Screen/talent_button.tscn" id="2_bo7n4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_82hvc"]
+font_size = 32
+
+[node name="TalentScreen" type="Control" unique_id=1620158122]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h6pdl")
+talent_points = null
+
+[node name="Panel" type="Panel" parent="." unique_id=296516795]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=233776050]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.5
+offset_top = -64.0
+offset_right = 156.5
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=1336112659]
+layout_mode = 2
+text = "Talent Points: -1"
+label_settings = SubResource("LabelSettings_82hvc")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=343842343]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TalentButton" parent="Panel/VBoxContainer/HBoxContainer" unique_id=236319619 instance=ExtResource("2_bo7n4")]
+layout_mode = 2
+
+[node name="TalentButton2" parent="Panel/VBoxContainer/HBoxContainer" unique_id=992744040 instance=ExtResource("2_bo7n4")]
+layout_mode = 2
+
+[node name="TalentButton3" parent="Panel/VBoxContainer/HBoxContainer" unique_id=256724037 instance=ExtResource("2_bo7n4")]
+layout_mode = 2
+
+[node name="TalentButton4" parent="Panel/VBoxContainer/HBoxContainer" unique_id=1805103620 instance=ExtResource("2_bo7n4")]
+layout_mode = 2
+
+[node name="TalentButton5" parent="Panel/VBoxContainer/HBoxContainer" unique_id=1711229142 instance=ExtResource("2_bo7n4")]
+layout_mode = 2
+
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/TalentButton" to="." method="_on_talent_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/TalentButton2" to="." method="_on_talent_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/TalentButton3" to="." method="_on_talent_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/TalentButton4" to="." method="_on_talent_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/TalentButton5" to="." method="_on_talent_button_pressed"]
