@@ -117,5 +117,5 @@ func _on_health_component_damaged(attack: Attack) -> void:
 func _on_body_entered(_body: Node) -> void:
 	if prev_vel.length() > 700:
 		var damage: float = prev_vel.length() / 100
-		print(damage)
+		#print(damage)
 		health_component.apply_attack(Attack.new(damage))

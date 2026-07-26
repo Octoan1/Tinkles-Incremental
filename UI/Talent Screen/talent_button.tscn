@@ -7,5 +7,5 @@ offset_right = 8.0
 offset_bottom = 8.0
 theme_override_font_sizes/font_size = 32
 keep_pressed_outside = true
-text = "press"
+text = "null"
 script = ExtResource("1_b01a5")

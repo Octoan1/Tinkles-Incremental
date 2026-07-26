@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Talent" format=3 uid="uid://btpd13wr21jx2"]
+
+[ext_resource type="Script" uid="uid://cgimo6dkomn0x" path="res://UI/Talent Screen/Talents/Script/talent.gd" id="1_uol12"]
+[ext_resource type="Texture2D" uid="uid://xhlfacapinxx" path="res://Assets/Asesprite/blood_particle.png" id="1_wp6wc"]
+
+[resource]
+script = ExtResource("1_uol12")
+icon = ExtResource("1_wp6wc")
+name = "small"
+metadata/_custom_type_script = "uid://cgimo6dkomn0x"

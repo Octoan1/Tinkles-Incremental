@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*uid://dcpnmeuby7xwg"
 Surface="*uid://bh8lxeiky1jnu"
+TalentManager="*uid://c2fg1nhmyhxev"
 
 [debug]
 
