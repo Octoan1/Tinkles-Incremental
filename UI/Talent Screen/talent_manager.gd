@@ -3,9 +3,13 @@ extends Node
 var talent_points: int = -1
 var max_talent_points: int = 3
 
-var unlocked_talents: Dictionary[String, bool] = {}
+var active_talents: Dictionary[String, bool] = {}
 
-func _ready() -> void:
+func _ready() -> void: 
+	populate_unlock_dictionary()
+	debug_active()
+	
+func populate_unlock_dictionary() -> void:
 	talent_points = max_talent_points
 	
 	var folder_path: String = "res://UI/Talent Screen/Talents/"
@@ -20,29 +24,33 @@ func _ready() -> void:
 		var resource: Resource = load(full_path)
 		if resource is Talent:
 			var talent: Talent = resource
-			unlocked_talents[talent.name] = false
+			active_talents[talent.name] = false
+
+func debug_active() -> void:
+	print(active_talents) 
 	
-	debug_unlocked()
-	
-func debug_unlocked() -> void:
-	print(unlocked_talents) 
-	
-func try_unlock(talent_name: String) -> bool:
+func try_activate(talent_name: String) -> bool:
 	# already unlocked
-	if unlocked_talents[talent_name]:
-		debug_unlocked()
+	if active_talents[talent_name]:
+		debug_active()
 		return false 
 	
 	# no talent points to spend
 	if talent_points <= 0:
-		debug_unlocked()
+		debug_active()
 		return false
 		 
 	# otherwise unlock
-	unlock(talent_name)
-	debug_unlocked()
+	activate(talent_name)
+	debug_active()
 	return true
 	
-func unlock(talent_name: String) -> void:
-	unlocked_talents[talent_name] = true
+func activate(talent_name: String) -> void:
+	active_talents[talent_name] = true
 	talent_points -= 1
+	
+func reset_talents() -> void:
+	for talent_name: String in active_talents:
+		active_talents[talent_name] = false
+	talent_points = max_talent_points
+	debug_active()

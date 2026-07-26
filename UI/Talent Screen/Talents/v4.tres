@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Talent" format=3 uid="uid://btpd13wr21jx2"]
+
+[ext_resource type="Texture2D" uid="uid://bypcf1giookoa" path="res://Assets/Asesprite/lemming.png" id="1_p87r2"]
+[ext_resource type="Script" uid="uid://cgimo6dkomn0x" path="res://UI/Talent Screen/Talents/Script/talent.gd" id="2_fg6ae"]
+
+[resource]
+script = ExtResource("2_fg6ae")
+icon = ExtResource("1_p87r2")
+name = "v4"
+metadata/_custom_type_script = "uid://cgimo6dkomn0x"
