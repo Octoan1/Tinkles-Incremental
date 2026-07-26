@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cfjinxyfp22kg"]
 
-[ext_resource type="Script" uid="uid://bqa4pfspwta1p" path="res://crusher.gd" id="1_bo67b"]
+[ext_resource type="Script" uid="uid://bqa4pfspwta1p" path="res://Objects/Buildings/BuildingScripts/crusher.gd" id="1_bo67b"]
 [ext_resource type="Texture2D" uid="uid://ddux8qo1iqdpo" path="res://icon.svg" id="2_b4l58"]
 [ext_resource type="PackedScene" uid="uid://ci8eqs22jrag3" path="res://Game Logic/damage_area.tscn" id="3_muvn6"]
 [ext_resource type="Script" uid="uid://dn3uct6bpvl42" path="res://Components/hitbox_component.gd" id="4_b4l58"]

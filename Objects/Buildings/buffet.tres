@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ddux8qo1iqdpo" path="res://icon.svg" id="1_68o2f"]
 [ext_resource type="Script" uid="uid://dn8p2gkbl7742" path="res://Objects/Buildings/Building.gd" id="1_g4upg"]
 [ext_resource type="PackedScene" uid="uid://dlayonr1hr4tv" path="res://Objects/Buildings/buffet.tscn" id="1_us2ye"]
+[ext_resource type="Script" uid="uid://cw3stsb1klbqh" path="res://Objects/Buildings/BuildingUpgrades/BuildingUpgrade.gd" id="4_y1aks"]
 
 [resource]
 script = ExtResource("1_g4upg")
