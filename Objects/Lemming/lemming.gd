@@ -66,6 +66,7 @@ func _on_click_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: 
 
 func inspect() -> void:
 	get_tree().call_group("Lemming", "disable_camera")
+	get_tree().call_group("Building", "disable_camera")
 	lemming_cam.enabled = true
 
 func disable_camera() -> void:

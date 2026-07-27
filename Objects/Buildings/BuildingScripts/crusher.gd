@@ -1,4 +1,4 @@
-extends Node2D
+extends BuildingClass
 
 @export var attack_cooldown: float = 3.0
 

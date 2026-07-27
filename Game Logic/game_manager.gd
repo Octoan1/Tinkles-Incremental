@@ -7,7 +7,7 @@ var buildings: Array[Building]
 var shop_node: Control
 
 func _ready() -> void:
-	var folder_path: String = "res://Objects/Buildings/"
+	var folder_path: String = "res://Objects/Buildings/BuildingResources/"
 	var files: PackedStringArray = DirAccess.get_files_at(folder_path)
 	
 	for file_name: String in files:

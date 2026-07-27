@@ -1,4 +1,4 @@
-extends Node2D
+extends BuildingClass
 const FED: Resource = preload("uid://c3jioqw4s0t18")
 var price: float = 15.0
 
