@@ -11,7 +11,7 @@ func _ready() -> void:
 		buttons.append(button)
 		
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("talent_reset"):
 		TalentManager.reset_talents()
 		update_label()
