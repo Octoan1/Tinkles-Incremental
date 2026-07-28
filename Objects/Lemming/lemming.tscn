@@ -74,6 +74,7 @@ outline_color = Color(0, 0, 0, 1)
 radius = 35.0
 
 [node name="Lemming" type="RigidBody2D" unique_id=1702097741 groups=["Lemming"]]
+z_index = 1
 collision_layer = 2
 collision_mask = 5
 input_pickable = true
