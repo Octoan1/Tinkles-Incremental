@@ -11,8 +11,8 @@
 [ext_resource type="Script" uid="uid://ccablvye3xlq6" path="res://Objects/Lemming/states/jump_state.gd" id="9_rmnnw"]
 [ext_resource type="Script" uid="uid://bklwrrodqolfp" path="res://Objects/Lemming/states/fall_state.gd" id="10_stssr"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bs02x"]
-size = Vector2(27, 46)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_stssr"]
+height = 48.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvufl"]
 size = Vector2(24, 41)
@@ -115,7 +115,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"eating",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -189,7 +189,7 @@ radius = 35.0
 [node name="Lemming" type="RigidBody2D" unique_id=1702097741 groups=["Lemming"]]
 z_index = 1
 collision_layer = 2
-collision_mask = 5
+collision_mask = 7
 input_pickable = true
 lock_rotation = true
 contact_monitor = true
@@ -204,7 +204,7 @@ metadata/_custom_type_script = "uid://dxwlmgwyk1wa2"
 [node name="WorldCollision" type="CollisionShape2D" parent="." unique_id=514483512]
 z_index = 1
 position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_bs02x")
+shape = SubResource("CapsuleShape2D_stssr")
 
 [node name="HurtboxComponent" type="Area2D" parent="." unique_id=701341300 node_paths=PackedStringArray("health_component")]
 z_index = 1
@@ -225,7 +225,7 @@ zoom = Vector2(4, 4)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=615340767]
 sprite_frames = SubResource("SpriteFrames_4ypp3")
-animation = &"fat_walk"
+animation = &"eating"
 
 [node name="Lifespan" type="Timer" parent="." unique_id=1267265694]
 

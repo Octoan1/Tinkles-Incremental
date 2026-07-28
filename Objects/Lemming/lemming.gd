@@ -87,7 +87,6 @@ func _on_click_timer_timeout() -> void:
 
 ### TRAITS HERE ###
 func _fed() -> void:
-	global_scale *= 1.5
 	
 	var max_health: float = health_component.get_max_health()
 	health_component.set_max_health(max_health * 2)
