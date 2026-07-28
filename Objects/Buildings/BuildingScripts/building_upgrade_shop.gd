@@ -22,11 +22,22 @@ func populate_shop(building: Building) -> void:
 		var current_upgrade: BuildingUpgrade = upgrades[i]
 		var current_level: int = current_upgrade.upgrade_level
 		
+		upgrade_ui.get_node("UpgradeIcon").texture = current_upgrade.upgrade_icon
+		
+		# display upgrade data if not max level
+		if not current_upgrade.is_max_level:
+			upgrade_ui.get_node("UpgradeLevel").text = "LVL " + str(current_level)
+			upgrade_ui.get_node("UpgradePriceButton").text = str(current_upgrade.level_cost[current_level]) + " Goo"
+		# otherwise display unique max level ui
+		else:
+			upgrade_ui.get_node("UpgradeLevel").text = "LVL MAX"
+			upgrade_ui.get_node("UpgradePriceButton").text = "SOLD OUT"
+			upgrade_ui.get_node("UpgradeIcon").modulate = Color(1, 0, 0)
+			
+		
+		upgrade_ui.get_node("UpgradeIcon").texture = current_upgrade.upgrade_icon
 		upgrade_ui.get_node("UpgradeName").text = current_upgrade.upgrade_name
 		upgrade_ui.get_node("UpgradeDescription").text = current_upgrade.description
-		upgrade_ui.get_node("UpgradeLevel").text = "LVL " + str(current_level)
-		upgrade_ui.get_node("UpgradePriceButton").text = str(current_upgrade.level_cost[current_level]) + " Goo"
-		upgrade_ui.get_node("UpgradeIcon").texture = current_upgrade.upgrade_icon
 		
 		# add the building upgrade to the v_box
 		v_box_container.add_child(upgrade_ui)
