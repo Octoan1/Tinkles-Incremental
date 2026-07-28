@@ -1,6 +1,6 @@
 extends State
 
-@onready var lemming: RigidBody2D = $"../.."
+@onready var lemming: Lemming = $"../.."
 @onready var sprite: AnimatedSprite2D = $"../../AnimatedSprite2D"
 @export_category("Configuration")
 @export var speed: float = 300
@@ -8,7 +8,12 @@ extends State
 @export var jump_state: State
 
 func enter() -> void:
-	sprite.play("walk")
+	print(lemming.is_a_fat_chud)
+	if lemming.is_a_fat_chud: 
+		sprite.play("fat_walk")
+		print("hi")
+	else:
+		sprite.play("walk")
 
 
 func physics_update(_delta: float) -> void:

@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name Lemming
 
 
 
@@ -20,7 +21,7 @@ var prev_vel: Vector2 = Vector2.ZERO
 
 @onready var health_component: HealthComponent = $HealthComponent
 
-
+var is_a_fat_chud: bool = false
 #var invuln_duration: float = 0.5
 #var invulnerable: bool = false
 
@@ -52,6 +53,8 @@ func _physics_process(_delta: float) -> void:
 		print("pos: ", self.global_position)
 		print("vel: ", self.linear_velocity)
 		print("health: ", health_component.get_health())
+	
+	
 
 func _on_click_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and click_ready:
@@ -88,8 +91,9 @@ func _fed() -> void:
 	var max_health: float = health_component.get_max_health()
 	health_component.set_max_health(max_health * 2)
 	health_component.reset()
-	#health *= 2
-	#health_component
+	
+	sprite.play("fat_walk")
+	#is_a_fat_chud = true
 
 
 func _on_health_component_died() -> void:

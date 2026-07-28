@@ -21,6 +21,50 @@ size = Vector2(24, 41)
 atlas = ExtResource("4_oqybh")
 region = Rect2(0, 0, 48, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_stssr"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(0, 192, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uktak"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(0, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ql3o3"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(48, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wtnv"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(96, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tmk5"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(144, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7urf8"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(192, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv37i"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(240, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thofy"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(288, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfrgx"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(336, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6byu"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(384, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wg3jq"]
+atlas = ExtResource("4_oqybh")
+region = Rect2(432, 256, 48, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ypp3"]
 atlas = ExtResource("4_oqybh")
 region = Rect2(0, 64, 48, 64)
@@ -46,6 +90,49 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stssr")
+}],
+"loop": true,
+"name": &"fat",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uktak")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ql3o3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wtnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8tmk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7urf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv37i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thofy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfrgx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6byu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wg3jq")
+}],
+"loop": true,
+"name": &"fat_walk",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -112,6 +199,8 @@ zoom = Vector2(4, 4)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=615340767]
 sprite_frames = SubResource("SpriteFrames_4ypp3")
+animation = &"fat_walk"
+frame_progress = 0.08363908
 
 [node name="Lifespan" type="Timer" parent="." unique_id=1267265694]
 
