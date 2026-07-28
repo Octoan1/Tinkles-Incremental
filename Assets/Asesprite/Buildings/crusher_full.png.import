@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwrq5p2snyl6"
-path="res://.godot/imported/buffet.png-c8ab7b27b60078f005eeb1f098dd1c2d.ctex"
+uid="uid://be0y1scqacta7"
+path="res://.godot/imported/crusher_full.png-09ff7ce7beb7cad6a931a4348f74119e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Asesprite/buffet.png"
-dest_files=["res://.godot/imported/buffet.png-c8ab7b27b60078f005eeb1f098dd1c2d.ctex"]
+source_file="res://Assets/Asesprite/Buildings/crusher_full.png"
+dest_files=["res://.godot/imported/crusher_full.png-09ff7ce7beb7cad6a931a4348f74119e.ctex"]
 
 [params]
 

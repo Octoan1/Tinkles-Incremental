@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dlayonr1hr4tv"]
 
 [ext_resource type="Script" uid="uid://cbn6eubu7egnd" path="res://buffet.gd" id="1_oxico"]
-[ext_resource type="Texture2D" uid="uid://bwrq5p2snyl6" path="res://Assets/Asesprite/buffet.png" id="2_oxico"]
+[ext_resource type="Texture2D" uid="uid://cl2dwoedyn25d" path="res://Assets/Asesprite/Buildings/buffet.png" id="2_oxico"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
 
