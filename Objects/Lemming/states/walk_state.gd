@@ -8,10 +8,8 @@ extends State
 @export var jump_state: State
 
 func enter() -> void:
-	print(lemming.is_a_fat_chud)
 	if lemming.is_a_fat_chud: 
 		sprite.play("fat_walk")
-		print("hi")
 	else:
 		sprite.play("walk")
 

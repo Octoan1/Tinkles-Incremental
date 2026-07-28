@@ -12,6 +12,7 @@ var traits: Array[Trait]
 @onready var lifespan_timer: Timer = $Lifespan
 @onready var lemming_cam: Camera2D = $LemmingCam
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var state_machine: StateMachine = $StateMachine
 
 @onready var click_timer: Timer = $click_timer
 var click_ready: bool = true
@@ -92,7 +93,8 @@ func _fed() -> void:
 	health_component.set_max_health(max_health * 2)
 	health_component.reset()
 	
-	sprite.play("fat_walk")
+	is_a_fat_chud = true
+	state_machine.change_state($StateMachine/Eating)
 	#is_a_fat_chud = true
 
 
