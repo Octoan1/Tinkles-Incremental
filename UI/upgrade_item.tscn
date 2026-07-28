@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://bwujx2uaicury"]
+
+[node name="UpgradeItem" type="Panel" unique_id=1582260106]
+custom_minimum_size = Vector2(600, 200)
+
+[node name="UpgradeName" type="Label" parent="." unique_id=108657131]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -85.0
+offset_right = 160.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "Name"
+autowrap_mode = 2
+
+[node name="UpgradeDescription" type="Label" parent="." unique_id=1761171550]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -108.0
+offset_right = 126.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "This is the upgrade description"
+autowrap_mode = 2
+
+[node name="UpgradeLevel" type="Label" parent="." unique_id=949320800]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -112.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 57.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Lvl X"
+
+[node name="UpgradePriceButton" type="Button" parent="." unique_id=2048807833]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -172.0
+offset_top = -112.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "50.0
+Goo"
+
+[node name="UpgradeIcon" type="TextureRect" parent="." unique_id=860747718]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 36.0
+offset_top = -64.0
+offset_right = 164.0
+offset_bottom = 64.0
+grow_vertical = 2

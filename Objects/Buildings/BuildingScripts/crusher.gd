@@ -14,9 +14,6 @@ var attacking: bool = false
 var resetting: bool = false
 var trap_speed: float = 500
 
-func _ready() -> void:
-	attack_cooldown_timer.start()
-
 func _physics_process(delta: float) -> void:
 	if attacking:
 		if crusher_trap.global_position.distance_to(trap_end.global_position) > 0.1:

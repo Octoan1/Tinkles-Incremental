@@ -1,18 +1,18 @@
 [gd_resource type="Resource" script_class="Building" format=3 uid="uid://b8cofyd3ivixy"]
 
-[ext_resource type="Script" uid="uid://dn8p2gkbl7742" path="res://Objects/Buildings/Building.gd" id="1_78jvi"]
-[ext_resource type="PackedScene" uid="uid://cfjinxyfp22kg" path="res://Objects/Buildings/crusher.tscn" id="1_pi62l"]
+[ext_resource type="PackedScene" uid="uid://cfjinxyfp22kg" path="res://Objects/Buildings/crusher.tscn" id="1_3mdeb"]
 [ext_resource type="Texture2D" uid="uid://bypcf1giookoa" path="res://Assets/Asesprite/lemming.png" id="2_b67am"]
+[ext_resource type="Script" uid="uid://dn8p2gkbl7742" path="res://Objects/Buildings/BuildingScripts/Building.gd" id="3_3mdeb"]
 [ext_resource type="Script" uid="uid://cw3stsb1klbqh" path="res://Objects/Buildings/BuildingUpgrades/BuildingUpgrade.gd" id="4_b67am"]
 [ext_resource type="Resource" uid="uid://m5y0c0dkvcln" path="res://Objects/Buildings/BuildingUpgrades/CrusherUpgrades/Cooldown.tres" id="5_aw4fb"]
 [ext_resource type="Resource" uid="uid://cfr5eofaga8bw" path="res://Objects/Buildings/BuildingUpgrades/CrusherUpgrades/Speed.tres" id="6_5jkb0"]
 
 [resource]
-script = ExtResource("1_78jvi")
+script = ExtResource("3_3mdeb")
 building_name = "Crusher"
 description = "Cruhses things"
 build_price = 5.0
 preview_image = ExtResource("2_b67am")
-prefab = ExtResource("1_pi62l")
+prefab = ExtResource("1_3mdeb")
 upgrades = Array[ExtResource("4_b67am")]([ExtResource("5_aw4fb"), ExtResource("6_5jkb0")])
 metadata/_custom_type_script = "uid://dn8p2gkbl7742"

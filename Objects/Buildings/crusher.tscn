@@ -22,6 +22,7 @@ script = ExtResource("1_bo67b")
 building_node = NodePath(".")
 building_cam = NodePath("BuildingComponents/BuildingCam")
 click_area = NodePath("BuildingComponents/ClickArea")
+building_name = "Crusher"
 
 [node name="BuildingComponents" type="Node2D" parent="." unique_id=457885875]
 
@@ -71,6 +72,7 @@ shape = SubResource("RectangleShape2D_5vw27")
 debug_color = Color(0.9987908, 0, 0.14475623, 0.41960785)
 
 [node name="attack_cooldown" type="Timer" parent="." unique_id=412730181]
+autostart = true
 
 [node name="TrapStart" type="Marker2D" parent="." unique_id=672596031]
 

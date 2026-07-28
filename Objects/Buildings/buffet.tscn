@@ -13,6 +13,7 @@ script = ExtResource("1_oxico")
 building_node = NodePath(".")
 building_cam = NodePath("BuildingComponents/BuildingCam")
 click_area = NodePath("BuildingComponents/ClickArea")
+building_name = "Buffet"
 
 [node name="BuildingComponents" type="Node2D" parent="." unique_id=1887783827]
 
