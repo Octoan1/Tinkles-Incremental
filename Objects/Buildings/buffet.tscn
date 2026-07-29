@@ -1,12 +1,35 @@
 [gd_scene format=3 uid="uid://dlayonr1hr4tv"]
-
-[ext_resource type="Script" uid="uid://cbn6eubu7egnd" path="res://buffet.gd" id="1_oxico"]
 [ext_resource type="Texture2D" uid="uid://cl2dwoedyn25d" path="res://Assets/Asesprite/Buildings/buffet.png" id="2_oxico"]
+[ext_resource type="Script" uid="uid://cbn6eubu7egnd" path="res://Objects/Buildings/BuildingScripts/buffet.gd" id="1_oxico"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxico"]
+size = Vector2(65.81635, 64.37663)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
 
-[node name="Buffet" type="Node2D" unique_id=241154822]
+[node name="Buffet" type="Node2D" unique_id=241154822 node_paths=PackedStringArray("building_node", "building_cam", "click_area") groups=["Building"]]
 script = ExtResource("1_oxico")
+building_node = NodePath(".")
+building_cam = NodePath("BuildingComponents/BuildingCam")
+click_area = NodePath("BuildingComponents/ClickArea")
+building_name = "Buffet"
+
+[node name="BuildingComponents" type="Node2D" parent="." unique_id=1887783827]
+
+[node name="BuildingCam" type="Camera2D" parent="BuildingComponents" unique_id=15507034]
+enabled = false
+zoom = Vector2(3, 3)
+
+[node name="ClickArea" type="Area2D" parent="BuildingComponents" unique_id=1269866734]
+scale = Vector2(1.9599993, 1.9882989)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingComponents/ClickArea" unique_id=856887732]
+position = Vector2(-0.2551031, -2.8778595e-06)
+scale = Vector2(1, 0.99999976)
+shape = SubResource("RectangleShape2D_oxico")
+debug_color = Color(0.3180198, 0.31801978, 0.31801975, 0.41960785)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1560569755]
 texture = ExtResource("2_oxico")

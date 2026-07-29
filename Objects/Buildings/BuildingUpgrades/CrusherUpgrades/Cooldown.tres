@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BuildingUpgrade" format=3 uid="uid://m5y0c0dkvcln"]
+
+[ext_resource type="Script" uid="uid://cw3stsb1klbqh" path="res://Objects/Buildings/BuildingUpgrades/BuildingUpgrade.gd" id="1_a552v"]
+[ext_resource type="Texture2D" uid="uid://bypcf1giookoa" path="res://Assets/Asesprite/lemming.png" id="2_aju1d"]
+
+[resource]
+script = ExtResource("1_a552v")
+upgrade_name = "Cooldown"
+upgrade_icon = ExtResource("2_aju1d")
+description = "Improve cooldown speed by 50%"
+level_cost = Dictionary[int, float]({
+1: 50.0,
+2: 150.0,
+3: 350.0
+})
+metadata/_custom_type_script = "uid://cw3stsb1klbqh"

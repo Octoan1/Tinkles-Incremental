@@ -1,7 +1,6 @@
 extends Panel
 const BUILDING_PLACEMENT: Resource = preload("uid://fjg6m8jxharl")
 @onready var item_icon: TextureRect = $ItemIcon
-const BUFFET: Resource = preload("uid://dlayonr1hr4tv")
 
 
 var building_preview: Node2D
@@ -49,7 +48,7 @@ func _gui_input(event: InputEvent) -> void:
 				var tile_global_pos: Vector2 = tile_map.to_global(tile_map.map_to_local(tile_coords))
 				
 				building.global_position = tile_global_pos
-				
+				building.building_res = building_res
 				#building.global_position = get_global_mouse_position()
 				get_tree().current_scene.add_child(building)
 				

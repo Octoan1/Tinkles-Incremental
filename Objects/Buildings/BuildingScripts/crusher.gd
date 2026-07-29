@@ -1,4 +1,4 @@
-extends Node2D
+extends BuildingClass
 
 @export var attack_cooldown: float = 3.0
 
@@ -13,9 +13,8 @@ var price: float = 10.0
 var attacking: bool = false
 var resetting: bool = false
 var trap_speed: float = 500
-
-func _ready() -> void:
-	attack_cooldown_timer.start()
+var base_trap_speed: float = 500
+var base_cooldown: float = 3.0
 
 func _physics_process(delta: float) -> void:
 	if attacking:
@@ -41,3 +40,15 @@ func _physics_process(delta: float) -> void:
 
 func _on_attack_cooldown_timeout() -> void:
 	attacking = true
+
+func upgrade_building(building: Building) -> void:
+	var upgrades: Array[BuildingUpgrade] = building.upgrades
+	
+	for upgrade: BuildingUpgrade in upgrades:
+		if upgrade.upgrade_name == "Speed":
+			# 50% increase each level
+			trap_speed = base_trap_speed + (base_trap_speed * 0.5 * (upgrade.upgrade_level-1))
+		elif upgrade.upgrade_name == "Cooldown":
+			# 50% increase each level
+			attack_cooldown = base_cooldown + (base_cooldown * 0.5 * (upgrade.upgrade_level-1))
+	

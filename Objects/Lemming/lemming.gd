@@ -13,6 +13,7 @@ var traits: Array[Trait]
 @onready var lemming_cam: Camera2D = $LemmingCam
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var state_machine: StateMachine = $StateMachine
+@onready var click_area: Area2D = $ClickArea
 
 @onready var click_timer: Timer = $click_timer
 var click_ready: bool = true
@@ -57,19 +58,30 @@ func _physics_process(_delta: float) -> void:
 	
 	
 
-func _on_click_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and click_ready:
-		if lemming_cam.enabled and click_ready:
+func _unhandled_input(event: InputEvent) -> void:
+	if lemming_cam.enabled and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and click_ready:
+		if not click_in_area(event.position):
 			click_ready = false
 			click_timer.start()
 			disable_camera()
-		elif event.pressed and click_ready:
-				click_ready = false
-				click_timer.start()
-				inspect()
+
+func click_in_area(click_position: Vector2) -> bool:
+	return click_area.get_node("CollisionShape2D").shape.get_rect().has_point(click_area.to_local(click_position))
+
+func _on_click_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and click_ready:
+		if lemming_cam.enabled:
+			click_ready = false
+			click_timer.start()
+			disable_camera()
+		else:
+			click_ready = false
+			click_timer.start()
+			inspect()
 
 func inspect() -> void:
 	get_tree().call_group("Lemming", "disable_camera")
+	get_tree().call_group("Building", "disable_camera")
 	lemming_cam.enabled = true
 
 func disable_camera() -> void:
