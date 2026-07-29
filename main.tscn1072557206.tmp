@@ -57,7 +57,6 @@ script = ExtResource("1_ig7tw")
 scene = ExtResource("2_0xm2m")
 
 [node name="Timer" type="Timer" parent="LemmingSpawner" unique_id=805387629]
-wait_time = 2.0
 autostart = true
 
 [node name="Buffet" parent="." unique_id=241154822 instance=ExtResource("4_lquwl")]
