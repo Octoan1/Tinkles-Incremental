@@ -22,7 +22,6 @@ script = ExtResource("1_bo67b")
 building_node = NodePath(".")
 building_cam = NodePath("BuildingComponents/BuildingCam")
 click_area = NodePath("BuildingComponents/ClickArea")
-building_name = "Crusher"
 
 [node name="BuildingComponents" type="Node2D" parent="." unique_id=457885875]
 
@@ -35,7 +34,7 @@ scale = Vector2(1.9599993, 1.9882989)
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="BuildingComponents/ClickArea" unique_id=183861670]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingComponents/ClickArea" unique_id=183861670]
 position = Vector2(3.6492645e-07, 38.97803)
 scale = Vector2(1, 0.9999993)
 shape = SubResource("RectangleShape2D_muvn6")

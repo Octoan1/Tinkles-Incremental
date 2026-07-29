@@ -22,19 +22,28 @@ func _ready() -> void:
 	
 	
 
-
-func _on_click_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and click_ready:
-		print("Building selected")
-		if building_cam.enabled and click_ready:
+func _unhandled_input(event: InputEvent) -> void:
+	if building_cam.enabled and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and click_ready:
+		if not click_in_area(event.position):
 			click_ready = false
 			click_timer.start()
 			disable_camera()
-		elif event.pressed and click_ready:
-				click_ready = false
-				click_timer.start()
-				inspect()
-				
+
+func click_in_area(click_position: Vector2) -> bool:
+	return click_area.get_node("CollisionShape2D").shape.get_rect().has_point(click_area.to_local(click_position))
+
+func _on_click_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and click_ready:
+		print("Building selected")
+		if building_cam.enabled:
+			click_ready = false
+			click_timer.start()
+			disable_camera()
+		else:
+			click_ready = false
+			click_timer.start()
+			inspect()
+			
 
 # create a building group!
 func inspect() -> void:
@@ -48,7 +57,7 @@ func inspect() -> void:
 	building_shop_node = BUILDING_UPGRADE_SHOP.instantiate()
 	get_tree().current_scene.find_child("UI").add_child(building_shop_node)
 	building_shop_node.populate_shop(building_res)
-	
+	building_shop_node.connect("building_update", upgrade_building)
 	
 	
 	
@@ -62,3 +71,6 @@ func disable_camera() -> void:
 
 func _on_click_timer_timeout() -> void:
 	click_ready = true
+
+func upgrade_building(building: Building) -> void:
+	print("Error: This method has not been overriden by this building's script yet.")
