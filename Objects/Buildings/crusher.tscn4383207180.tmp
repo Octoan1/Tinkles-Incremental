@@ -8,11 +8,6 @@
 [ext_resource type="Script" uid="uid://benf61sjypd5q" path="res://Components/attack.gd" id="5_muvn6"]
 [ext_resource type="Script" uid="uid://c1x6l3whrm1qy" path="res://Objects/Buildings/velocity_damage.gd" id="7_suylq"]
 [ext_resource type="Script" uid="uid://dq508qu4sh5cj" path="res://Objects/Buildings/crusher_head.gd" id="8_5r6kk"]
-[ext_resource type="Script" uid="uid://db614o4y6ibp5" path="res://Components/States/state_machine.gd" id="9_lmmw3"]
-[ext_resource type="Script" uid="uid://8rcvvhnr2imm" path="res://Objects/Buildings/Crusher/States/crusher_idle_state.gd" id="10_phi57"]
-[ext_resource type="Script" uid="uid://dkybj2v1gca5f" path="res://Objects/Buildings/Crusher/States/crusher_slam_state.gd" id="11_5b8wm"]
-[ext_resource type="Script" uid="uid://cqcnc33ei2ag" path="res://Objects/Buildings/Crusher/States/crusher_wait_state.gd" id="12_8xxnn"]
-[ext_resource type="Script" uid="uid://dadvhoilf4h51" path="res://Objects/Buildings/Crusher/States/crusher_return_state.gd" id="13_vu326"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_muvn6"]
 size = Vector2(18.367355, 109.13857)
@@ -25,29 +20,8 @@ script = ExtResource("5_muvn6")
 attack_damage = 1.0
 metadata/_custom_type_script = "uid://benf61sjypd5q"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_suylq"]
-size = Vector2(265, 32)
-
-[sub_resource type="LabelSettings" id="LabelSettings_vu326"]
-font_size = 21
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
-
 [sub_resource type="Animation" id="Animation_5r6kk"]
 resource_name = "Idle"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CrusherHead:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_8xxnn"]
 length = 0.001
@@ -65,24 +39,10 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_lmmw3"]
-resource_name = "Return"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CrusherHead:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 171), Vector2(0, 0)]
-}
+resource_name = "Reset"
 
 [sub_resource type="Animation" id="Animation_phi57"]
 resource_name = "Slam"
-length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -90,7 +50,7 @@ tracks/0/path = NodePath("CrusherHead:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 171)]
@@ -98,28 +58,18 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_5b8wm"]
 resource_name = "Wait"
-length = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CrusherHead:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 171)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8xxnn"]
 _data = {
 &"Idle": SubResource("Animation_5r6kk"),
 &"RESET": SubResource("Animation_8xxnn"),
-&"Return": SubResource("Animation_lmmw3"),
+&"Reset": SubResource("Animation_lmmw3"),
 &"Slam": SubResource("Animation_phi57"),
 &"Wait": SubResource("Animation_5b8wm")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_suylq"]
+size = Vector2(265, 32)
 
 [node name="Crusher" type="Node2D" unique_id=762803738 node_paths=PackedStringArray("building_node", "building_cam", "click_area") groups=["Building"]]
 script = ExtResource("1_bo67b")
@@ -181,6 +131,9 @@ autostart = true
 [node name="TrapEnd" type="Marker2D" parent="." unique_id=1204994029]
 position = Vector2(0, 171)
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=146838717]
+libraries/ = SubResource("AnimationLibrary_8xxnn")
+
 [node name="VelocityDamage" type="Node2D" parent="." unique_id=1669645174]
 script = ExtResource("7_suylq")
 
@@ -195,43 +148,7 @@ position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_suylq")
 
 [node name="CrusherTrap2" type="Sprite2D" parent="CrusherHead" unique_id=1126154543]
-modulate = Color(0.11372549, 1, 1, 1)
 z_index = 2
 texture = ExtResource("3_suylq")
 
-[node name="SMDebug" type="Label" parent="." unique_id=566385388]
-offset_left = -39.0
-offset_top = -90.0
-offset_right = 39.0
-offset_bottom = -60.0
-text = "penis"
-label_settings = SubResource("LabelSettings_vu326")
-horizontal_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=146838717]
-libraries/ = SubResource("AnimationLibrary_8xxnn")
-
-[node name="StateMachine" type="Node" parent="." unique_id=6605375 node_paths=PackedStringArray("debug_label", "initial_state")]
-script = ExtResource("9_lmmw3")
-debug_mode = true
-debug_label = NodePath("../SMDebug")
-initial_state = NodePath("Idle")
-metadata/_custom_type_script = "uid://db614o4y6ibp5"
-
-[node name="Idle" type="Node" parent="StateMachine" unique_id=362440732]
-script = ExtResource("10_phi57")
-
-[node name="Slam" type="Node" parent="StateMachine" unique_id=757079973]
-script = ExtResource("11_5b8wm")
-
-[node name="Wait" type="Node" parent="StateMachine" unique_id=754406263]
-script = ExtResource("12_8xxnn")
-
-[node name="Return" type="Node" parent="StateMachine" unique_id=1633201257]
-script = ExtResource("13_vu326")
-
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Idle" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Slam" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Wait" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Return" method="_on_animation_player_animation_finished"]

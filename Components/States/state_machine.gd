@@ -2,6 +2,7 @@ extends Node
 class_name StateMachine
 
 @export var debug_mode: bool = false
+@export var debug_label: Label
 
 @export var initial_state: State
 
@@ -13,13 +14,13 @@ func _ready() -> void:
 	
 	change_state(initial_state)
 	
-	$"../SMDebug".visible = debug_mode
+	debug_label.visible = debug_mode
 		
 func _process(delta: float) -> void:
 	active_state.update(delta)
 	
 	if debug_mode:
-		$"../SMDebug".text = active_state.name
+		debug_label.text = active_state.name
 	
 func _physics_process(delta: float) -> void:
 	active_state.physics_update(delta)
