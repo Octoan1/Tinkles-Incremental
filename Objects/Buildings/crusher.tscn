@@ -159,7 +159,6 @@ collision_mask = 2
 script = ExtResource("8_5r6kk")
 
 [node name="CrusherHeadSprite" type="Sprite2D" parent="BuildingPivot/CrusherHead" unique_id=1126154543]
-modulate = Color(0.11372549, 1, 1, 1)
 texture = ExtResource("3_suylq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPivot/CrusherHead" unique_id=1377636717]
