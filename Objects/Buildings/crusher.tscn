@@ -38,7 +38,7 @@ length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CrusherHead:position")
+tracks/0/path = NodePath("BuildingPivot/CrusherHead:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -53,7 +53,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CrusherHead:position")
+tracks/0/path = NodePath("BuildingPivot/CrusherHead:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -68,14 +68,14 @@ resource_name = "Return"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CrusherHead:position")
+tracks/0/path = NodePath("BuildingPivot/CrusherHead:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 171), Vector2(0, 0)]
+"values": [Vector2(0, 176), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_phi57"]
@@ -84,14 +84,14 @@ length = 0.75
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CrusherHead:position")
+tracks/0/path = NodePath("BuildingPivot/CrusherHead:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.75),
 "transitions": PackedFloat32Array(6, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 171)]
+"values": [Vector2(0, 0), Vector2(0, 176)]
 }
 
 [sub_resource type="Animation" id="Animation_5b8wm"]
@@ -100,14 +100,14 @@ length = 0.75
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CrusherHead:position")
+tracks/0/path = NodePath("BuildingPivot/CrusherHead:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 171)]
+"values": [Vector2(0, 176)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8xxnn"]
@@ -122,49 +122,51 @@ _data = {
 [node name="Crusher" type="Node2D" unique_id=762803738 node_paths=PackedStringArray("building_node", "building_cam", "click_area") groups=["Building"]]
 script = ExtResource("1_bo67b")
 building_node = NodePath(".")
-building_cam = NodePath("BuildingComponents/BuildingCam")
-click_area = NodePath("BuildingComponents/ClickArea")
+building_cam = NodePath("BuildingPivot/BuildingComponents/BuildingCam")
+click_area = NodePath("BuildingPivot/BuildingComponents/ClickArea")
 
-[node name="BuildingComponents" type="Node2D" parent="." unique_id=457885875]
+[node name="BuildingPivot" type="Node2D" parent="." unique_id=2012399612]
+position = Vector2(0, -94)
 
-[node name="BuildingCam" type="Camera2D" parent="BuildingComponents" unique_id=1171870208]
+[node name="BuildingComponents" type="Node2D" parent="BuildingPivot" unique_id=457885875]
+
+[node name="BuildingCam" type="Camera2D" parent="BuildingPivot/BuildingComponents" unique_id=1171870208]
 enabled = false
 zoom = Vector2(2, 2)
 
-[node name="ClickArea" type="Area2D" parent="BuildingComponents" unique_id=1352681013]
-z_index = 1
+[node name="ClickArea" type="Area2D" parent="BuildingPivot/BuildingComponents" unique_id=1352681013]
 scale = Vector2(1.9599993, 1.9882989)
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingComponents/ClickArea" unique_id=183861670]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPivot/BuildingComponents/ClickArea" unique_id=183861670]
 position = Vector2(3.6492645e-07, 38.97803)
 scale = Vector2(1, 0.9999993)
 shape = SubResource("RectangleShape2D_muvn6")
 debug_color = Color(0.3180198, 0.31801978, 0.31801975, 0.41960785)
 
-[node name="CrusherArm" type="Sprite2D" parent="." unique_id=474143854]
+[node name="CrusherArm" type="Sprite2D" parent="BuildingPivot" unique_id=474143854]
 position = Vector2(0, 79.00002)
 texture = ExtResource("2_4pc34")
 
-[node name="VelocityDamage" type="Node2D" parent="." unique_id=1669645174]
+[node name="VelocityDamage" type="Node2D" parent="BuildingPivot" unique_id=1669645174]
 script = ExtResource("7_suylq")
 
-[node name="CrusherHead" type="AnimatableBody2D" parent="." unique_id=1958351471]
+[node name="CrusherHead" type="AnimatableBody2D" parent="BuildingPivot" unique_id=1958351471]
 z_index = 1
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("8_5r6kk")
 
-[node name="CrusherHeadSprite" type="Sprite2D" parent="CrusherHead" unique_id=1126154543]
+[node name="CrusherHeadSprite" type="Sprite2D" parent="BuildingPivot/CrusherHead" unique_id=1126154543]
 modulate = Color(0.11372549, 1, 1, 1)
 texture = ExtResource("3_suylq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CrusherHead" unique_id=1377636717]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPivot/CrusherHead" unique_id=1377636717]
 position = Vector2(0.5, -16)
 shape = SubResource("RectangleShape2D_suylq")
 
-[node name="HitboxComponent" type="Area2D" parent="CrusherHead" unique_id=1230046140]
+[node name="HitboxComponent" type="Area2D" parent="BuildingPivot/CrusherHead" unique_id=1230046140]
 collision_layer = 4
 collision_mask = 2
 input_pickable = false
@@ -172,16 +174,20 @@ script = ExtResource("4_b4l58")
 attack = SubResource("Resource_4pc34")
 metadata/_custom_type_script = "uid://dn3uct6bpvl42"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CrusherHead/HitboxComponent" unique_id=835420673]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPivot/CrusherHead/HitboxComponent" unique_id=835420673]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_5vw27")
 debug_color = Color(0.9987908, 0, 0.14475623, 0.41960785)
 
-[node name="StMchnDebug" type="Label" parent="." unique_id=566385388]
-offset_left = -39.0
-offset_top = -90.0
-offset_right = 39.0
-offset_bottom = -60.0
+[node name="StMchnDebug" type="Label" parent="BuildingPivot" unique_id=566385388]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.5
+offset_top = -96.0
+offset_right = 27.5
+offset_bottom = -66.0
+grow_horizontal = 2
 text = "penis"
 label_settings = SubResource("LabelSettings_vu326")
 horizontal_alignment = 1
@@ -192,7 +198,7 @@ libraries/ = SubResource("AnimationLibrary_8xxnn")
 [node name="StateMachine" type="Node" parent="." unique_id=6605375 node_paths=PackedStringArray("debug_label", "initial_state")]
 script = ExtResource("9_lmmw3")
 debug_mode = true
-debug_label = NodePath("../StMchnDebug")
+debug_label = NodePath("../BuildingPivot/StMchnDebug")
 initial_state = NodePath("Cooldown")
 metadata/_custom_type_script = "uid://db614o4y6ibp5"
 
