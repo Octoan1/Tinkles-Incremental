@@ -35,6 +35,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_5r6kk"]
 resource_name = "Idle"
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -80,7 +81,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_phi57"]
 resource_name = "Slam"
-length = 0.5
+length = 0.75
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -88,7 +89,7 @@ tracks/0/path = NodePath("CrusherHead:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.75),
 "transitions": PackedFloat32Array(6, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 171)]
@@ -96,6 +97,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_5b8wm"]
 resource_name = "Wait"
+length = 0.75
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -131,6 +133,7 @@ enabled = false
 zoom = Vector2(2, 2)
 
 [node name="ClickArea" type="Area2D" parent="BuildingComponents" unique_id=1352681013]
+z_index = 1
 scale = Vector2(1.9599993, 1.9882989)
 collision_layer = 2
 collision_mask = 0
@@ -146,7 +149,6 @@ position = Vector2(0, 79.00002)
 texture = ExtResource("2_4pc34")
 
 [node name="CrusherTrap" type="Sprite2D" parent="." unique_id=1123141897]
-visible = false
 z_index = 2
 texture = ExtResource("3_suylq")
 
@@ -212,10 +214,10 @@ libraries/ = SubResource("AnimationLibrary_8xxnn")
 script = ExtResource("9_lmmw3")
 debug_mode = true
 debug_label = NodePath("../SMDebug")
-initial_state = NodePath("Idle")
+initial_state = NodePath("Cooldown")
 metadata/_custom_type_script = "uid://db614o4y6ibp5"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=362440732]
+[node name="Cooldown" type="Node" parent="StateMachine" unique_id=362440732]
 script = ExtResource("10_phi57")
 
 [node name="Slam" type="Node" parent="StateMachine" unique_id=757079973]
@@ -228,7 +230,7 @@ script = ExtResource("12_8xxnn")
 script = ExtResource("13_vu326")
 
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Idle" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Cooldown" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Slam" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Wait" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Return" method="_on_animation_player_animation_finished"]

@@ -1,6 +1,7 @@
 extends State
 
 @onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
+@onready var crusher: Node2D = $"../.."
 @onready var return_state: Node = $"../Return"
 
 func enter() -> void:

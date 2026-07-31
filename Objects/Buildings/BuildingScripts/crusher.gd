@@ -1,12 +1,17 @@
 extends BuildingClass
 
-@export var attack_cooldown: float = 3.0
+@export var attack_cooldown: float = 3.0:
+	set(value):
+		attack_cooldown = value
+		#animation_player.an
+		
 
 @onready var damage_area: Area2D = $DamageArea
 @onready var attack_cooldown_timer: Timer = $attack_cooldown
 @onready var crusher_trap: Sprite2D = $CrusherTrap
 @onready var trap_start: Marker2D = $TrapStart
 @onready var trap_end: Marker2D = $TrapEnd
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 var price: float = 10.0
 
 
@@ -48,6 +53,9 @@ func upgrade_building(building: Building) -> void:
 		if upgrade.upgrade_name == "Speed":
 			# 50% increase each level
 			trap_speed = base_trap_speed + (base_trap_speed * 0.5 * (upgrade.upgrade_level-1))
+			animation_player.speed_scale = trap_speed / base_trap_speed
+			print(trap_speed)
+			print(animation_player.speed_scale)
 		elif upgrade.upgrade_name == "Cooldown":
 			# 50% increase each level
 			attack_cooldown = base_cooldown + (base_cooldown * 0.5 * (upgrade.upgrade_level-1))
