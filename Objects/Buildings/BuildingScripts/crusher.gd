@@ -2,11 +2,15 @@ extends BuildingClass
 
 @export var attack_cooldown: float = 3.0
 
-@onready var damage_area: Area2D = $DamageArea
-@onready var attack_cooldown_timer: Timer = $attack_cooldown
-@onready var crusher_trap: Sprite2D = $CrusherTrap
-@onready var trap_start: Marker2D = $TrapStart
-@onready var trap_end: Marker2D = $TrapEnd
+
+
+@onready var crusher_trap: Sprite2D = $BuildingPivot/CrusherTrap
+@onready var damage_area: Area2D = $BuildingPivot/DamageArea
+@onready var attack_cooldown_timer: Timer = $BuildingPivot/attack_cooldown
+@onready var trap_start: Marker2D = $BuildingPivot/TrapStart
+@onready var trap_end: Marker2D = $BuildingPivot/TrapEnd
+
+
 var price: float = 10.0
 
 

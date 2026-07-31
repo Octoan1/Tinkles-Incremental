@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cfjinxyfp22kg"]
-[ext_resource type="Texture2D" uid="uid://dk47dwu0iyuj7" path="res://Assets/Asesprite/Buildings/crusher_arm.png" id="2_4pc34"]
+
 [ext_resource type="Script" uid="uid://bqa4pfspwta1p" path="res://Objects/Buildings/BuildingScripts/crusher.gd" id="1_bo67b"]
+[ext_resource type="Texture2D" uid="uid://dk47dwu0iyuj7" path="res://Assets/Asesprite/Buildings/crusher_arm.png" id="2_4pc34"]
 [ext_resource type="PackedScene" uid="uid://ci8eqs22jrag3" path="res://Game Logic/damage_area.tscn" id="3_muvn6"]
 [ext_resource type="Texture2D" uid="uid://cfmwruc2c7br3" path="res://Assets/Asesprite/Buildings/crusher_head.png" id="3_suylq"]
 [ext_resource type="Script" uid="uid://dn3uct6bpvl42" path="res://Components/hitbox_component.gd" id="4_b4l58"]
@@ -20,44 +21,47 @@ metadata/_custom_type_script = "uid://benf61sjypd5q"
 [node name="Crusher" type="Node2D" unique_id=762803738 node_paths=PackedStringArray("building_node", "building_cam", "click_area") groups=["Building"]]
 script = ExtResource("1_bo67b")
 building_node = NodePath(".")
-building_cam = NodePath("BuildingComponents/BuildingCam")
-click_area = NodePath("BuildingComponents/ClickArea")
+building_cam = NodePath("BuildingPivot/BuildingComponents/BuildingCam")
+click_area = NodePath("BuildingPivot/BuildingComponents/ClickArea")
 
-[node name="BuildingComponents" type="Node2D" parent="." unique_id=457885875]
+[node name="BuildingPivot" type="Node2D" parent="." unique_id=2012399612]
+position = Vector2(0, -77)
 
-[node name="BuildingCam" type="Camera2D" parent="BuildingComponents" unique_id=1171870208]
+[node name="BuildingComponents" type="Node2D" parent="BuildingPivot" unique_id=457885875]
+
+[node name="BuildingCam" type="Camera2D" parent="BuildingPivot/BuildingComponents" unique_id=1171870208]
 enabled = false
 zoom = Vector2(2, 2)
 
-[node name="ClickArea" type="Area2D" parent="BuildingComponents" unique_id=1352681013]
+[node name="ClickArea" type="Area2D" parent="BuildingPivot/BuildingComponents" unique_id=1352681013]
 scale = Vector2(1.9599993, 1.9882989)
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingComponents/ClickArea" unique_id=183861670]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPivot/BuildingComponents/ClickArea" unique_id=183861670]
 position = Vector2(3.6492645e-07, 38.97803)
 scale = Vector2(1, 0.9999993)
 shape = SubResource("RectangleShape2D_muvn6")
 debug_color = Color(0.3180198, 0.31801978, 0.31801975, 0.41960785)
 
-[node name="CrusherArm" type="Sprite2D" parent="." unique_id=474143854]
+[node name="CrusherArm" type="Sprite2D" parent="BuildingPivot" unique_id=474143854]
 position = Vector2(0, 79.00002)
 texture = ExtResource("2_4pc34")
 
-[node name="CrusherTrap" type="Sprite2D" parent="." unique_id=1123141897]
+[node name="CrusherTrap" type="Sprite2D" parent="BuildingPivot" unique_id=1123141897]
 z_index = 2
 texture = ExtResource("3_suylq")
 
-[node name="DamageArea" parent="." unique_id=743706955 instance=ExtResource("3_muvn6")]
+[node name="DamageArea" parent="BuildingPivot" unique_id=743706955 instance=ExtResource("3_muvn6")]
 input_pickable = false
 damage = 2
 insta_kill = true
 one_shot = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=83892567]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPivot/DamageArea" unique_id=83892567]
 shape = SubResource("RectangleShape2D_5vw27")
 
-[node name="HitboxComponent" type="Area2D" parent="DamageArea" unique_id=1230046140]
+[node name="HitboxComponent" type="Area2D" parent="BuildingPivot/DamageArea" unique_id=1230046140]
 collision_layer = 4
 collision_mask = 2
 input_pickable = false
@@ -65,16 +69,16 @@ script = ExtResource("4_b4l58")
 attack = SubResource("Resource_4pc34")
 metadata/_custom_type_script = "uid://dn3uct6bpvl42"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea/HitboxComponent" unique_id=835420673]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPivot/DamageArea/HitboxComponent" unique_id=835420673]
 shape = SubResource("RectangleShape2D_5vw27")
 debug_color = Color(0.9987908, 0, 0.14475623, 0.41960785)
 
-[node name="attack_cooldown" type="Timer" parent="." unique_id=412730181]
+[node name="attack_cooldown" type="Timer" parent="BuildingPivot" unique_id=412730181]
 autostart = true
 
-[node name="TrapStart" type="Marker2D" parent="." unique_id=672596031]
+[node name="TrapStart" type="Marker2D" parent="BuildingPivot" unique_id=672596031]
 
-[node name="TrapEnd" type="Marker2D" parent="." unique_id=1204994029]
+[node name="TrapEnd" type="Marker2D" parent="BuildingPivot" unique_id=1204994029]
 position = Vector2(0, 171)
 
-[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="BuildingPivot/attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
