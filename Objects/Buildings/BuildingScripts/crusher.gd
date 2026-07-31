@@ -1,50 +1,47 @@
 extends BuildingClass
 
-@export var attack_cooldown: float = 3.0:
-	set(value):
-		attack_cooldown = value
-		#animation_player.an
-		
+@export var attack_cooldown: float = 4.0
 
-@onready var damage_area: Area2D = $DamageArea
-@onready var attack_cooldown_timer: Timer = $attack_cooldown
-@onready var crusher_trap: Sprite2D = $CrusherTrap
-@onready var trap_start: Marker2D = $TrapStart
-@onready var trap_end: Marker2D = $TrapEnd
+#@onready var damage_area: Area2D = $DamageArea
+#@onready var attack_cooldown_timer: Timer = $attack_cooldown
+#@onready var crusher_trap: Sprite2D = $CrusherTrap
+#@onready var trap_start: Marker2D = $TrapStart
+#@onready var trap_end: Marker2D = $TrapEnd
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 var price: float = 10.0
 
 
-var attacking: bool = false
-var resetting: bool = false
+#var attacking: bool = false
+#var resetting: bool = false
 var trap_speed: float = 500
 var base_trap_speed: float = 500
-var base_cooldown: float = 3.0
+var base_cooldown: float = 4.0
 
 func _physics_process(delta: float) -> void:
-	if attacking:
-		if crusher_trap.global_position.distance_to(trap_end.global_position) > 0.1:
-			damage_area.monitoring = true
-			
-			damage_area.global_position.y = move_toward(damage_area.global_position.y, trap_end.global_position.y, trap_speed * delta)
-			crusher_trap.global_position.y = move_toward(crusher_trap.global_position.y, trap_end.global_position.y, trap_speed * delta)
-		else:
-			attacking = false
-			damage_area.monitoring = false
-			resetting = true
-			
-			
-	elif resetting:
-		if crusher_trap.global_position.distance_to(trap_start.global_position) > 0.1:
-			damage_area.global_position.y = move_toward(crusher_trap.global_position.y, trap_start.global_position.y, trap_speed * delta)
-			crusher_trap.global_position.y = move_toward(crusher_trap.global_position.y, trap_start.global_position.y, trap_speed * delta)
-		else:
-			resetting = false
-			attack_cooldown_timer.start()
+	#if attacking:
+		#if crusher_trap.global_position.distance_to(trap_end.global_position) > 0.1:
+			#damage_area.monitoring = true
+			#
+			#damage_area.global_position.y = move_toward(damage_area.global_position.y, trap_end.global_position.y, trap_speed * delta)
+			#crusher_trap.global_position.y = move_toward(crusher_trap.global_position.y, trap_end.global_position.y, trap_speed * delta)
+		#else:
+			#attacking = false
+			#damage_area.monitoring = false
+			#resetting = true
+			#
+			#
+	#elif resetting:
+		#if crusher_trap.global_position.distance_to(trap_start.global_position) > 0.1:
+			#damage_area.global_position.y = move_toward(crusher_trap.global_position.y, trap_start.global_position.y, trap_speed * delta)
+			#crusher_trap.global_position.y = move_toward(crusher_trap.global_position.y, trap_start.global_position.y, trap_speed * delta)
+		#else:
+			#resetting = false
+			#attack_cooldown_timer.start()
+	pass
 
 
-func _on_attack_cooldown_timeout() -> void:
-	attacking = true
+#func _on_attack_cooldown_timeout() -> void:
+	#attacking = true
 
 func upgrade_building(building: Building) -> void:
 	var upgrades: Array[BuildingUpgrade] = building.upgrades
@@ -52,11 +49,12 @@ func upgrade_building(building: Building) -> void:
 	for upgrade: BuildingUpgrade in upgrades:
 		if upgrade.upgrade_name == "Speed":
 			# 50% increase each level
-			trap_speed = base_trap_speed + (base_trap_speed * 0.5 * (upgrade.upgrade_level-1))
+			#trap_speed = base_trap_speed + (base_trap_speed * 0.5 * (upgrade.upgrade_level-1))
+			trap_speed = base_trap_speed * 1.5**(upgrade.upgrade_level-1)
 			animation_player.speed_scale = trap_speed / base_trap_speed
-			print(trap_speed)
-			print(animation_player.speed_scale)
 		elif upgrade.upgrade_name == "Cooldown":
-			# 50% increase each level
-			attack_cooldown = base_cooldown + (base_cooldown * 0.5 * (upgrade.upgrade_level-1))
+			# 50% decrease each level
+			# formula: cd - cd(1 - (1/2)^(x-1)) 
+			#attack_cooldown = base_cooldown - base_cooldown *(1 - 0.5**(upgrade.upgrade_level-1))
+			attack_cooldown = base_cooldown * 0.5**(upgrade.upgrade_level-1)
 	

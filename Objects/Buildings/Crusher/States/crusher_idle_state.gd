@@ -3,7 +3,6 @@ extends State
 @onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
 @onready var crusher: Node2D = $"../.."
 @onready var slam: Node = $"../Slam"
-@onready var attack_cooldown: Timer = $AttackCooldown
 
 
 func enter() -> void:
