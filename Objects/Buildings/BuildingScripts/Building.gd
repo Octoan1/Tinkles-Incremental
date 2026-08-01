@@ -12,3 +12,4 @@ class_name Building
 # the values will contain the upgrade's current level, cost, and if it is maxed
 # ex: crusher_speed = (1, 50.0, false), crusher_cooldown = (2, 150.0, false)
 @export var upgrades: Array[BuildingUpgrade]
+@export var placement: Vector2 = Vector2(0,0)

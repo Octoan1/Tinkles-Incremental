@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 			
 	elif resetting:
 		if crusher_trap.global_position.distance_to(trap_start.global_position) > 0.1:
-			damage_area.global_position.y = move_toward(crusher_trap.global_position.y, trap_start.global_position.y, trap_speed * delta)
+			damage_area.global_position.y = move_toward(damage_area.global_position.y, trap_start.global_position.y, trap_speed * delta)
 			crusher_trap.global_position.y = move_toward(crusher_trap.global_position.y, trap_start.global_position.y, trap_speed * delta)
 		else:
 			resetting = false
@@ -55,4 +55,6 @@ func upgrade_building(building: Building) -> void:
 		elif upgrade.upgrade_name == "Cooldown":
 			# 50% increase each level
 			attack_cooldown = base_cooldown + (base_cooldown * 0.5 * (upgrade.upgrade_level-1))
+	
+	GameManager.save_game()
 	

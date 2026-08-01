@@ -8,10 +8,55 @@ const SHOP_ITEM: Resource = preload("uid://byw00vpoqkdyb")
 var shop_items: Array[Panel]
 
 func _ready() -> void:
-	populate_shop()
 	GameManager.shop_node = self
+	populate_shop()
 
 func populate_shop() -> void:
+	# Clear out any old rows/items if they exist to prevent duplication
+	for child in v_box_container.get_children():
+		child.queue_free()
+		
+	# Force Godot to clear the tree immediately before calculating size
+	#v_box_container.columns = 1 # optional layout reset if needed
+	
+	var h_box: HBoxContainer
+	
+	for i: int in GameManager.buildings.size():
+		# dynamically create an new hbox whenever a row of size 2 is full
+		if i % 2 == 0:
+			h_box = HBoxContainer.new()
+			h_box.layout_direction = Control.LAYOUT_DIRECTION_LTR
+			h_box.size_flags_horizontal = Control.SIZE_FILL
+			h_box.size_flags_vertical = Control.SIZE_EXPAND_FILL
+			v_box_container.add_child(h_box)
+		
+		# instantiate the item
+		var item: Node = SHOP_ITEM.instantiate()
+		var building: Building = GameManager.buildings[i]
+		
+		if not building.purchased:
+			item.get_node("PriceLabel").text = str(building.build_price) + " Goo"
+			item.get_node("ItemIcon").texture = building.preview_image
+			item.get_node("ItemIcon").modulate = Color(1, 1, 1) # Reset color
+			item.item_price = building.build_price
+			item.building_path = building.prefab
+			item.building_res = building
+		else:
+			item.get_node("PriceLabel").text = "Sold Out!"
+			item.get_node("ItemIcon").texture = building.preview_image
+			item.get_node("ItemIcon").modulate = Color(1, 0, 0)
+			item.item_price = building.build_price
+			item.building_path = building.prefab
+			item.building_res = building
+		
+		# add the item to the correct h_box
+		h_box.add_child(item)
+	
+	# Wait one frame for the children to attach, then cache references
+	await get_tree().process_frame
+	access_items()
+
+func populate_shop_old() -> void:
 	access_items()
 	
 	var h_box: HBoxContainer
@@ -65,9 +110,16 @@ func populate_shop() -> void:
 
 func update_shop() -> void:
 	access_items()
+	
+	if shop_items.size() != GameManager.buildings.size():
+		populate_shop()
+		return
+	
+	
 	for i: int in GameManager.buildings.size():
 		var item: Panel = shop_items[i]
 		var building: Building = GameManager.buildings[i]
+		print(building.purchased)
 		if building.purchased:
 			item.get_node("PriceLabel").text = "Sold Out!"
 			item.get_node("ItemIcon").texture = building.preview_image
@@ -75,6 +127,14 @@ func update_shop() -> void:
 			item.item_price = building.build_price
 			item.building_path = building.prefab
 			item.building_res = building
+		else:
+			item.get_node("PriceLabel").text = str(building.build_price) + " Goo"
+			item.get_node("ItemIcon").texture = building.preview_image
+			item.get_node("ItemIcon").modulate = Color(1, 1, 1)
+			item.item_price = building.build_price
+			item.building_path = building.prefab
+			item.building_res = building
+			
 
 func access_items() -> void:
 	shop_items = []
