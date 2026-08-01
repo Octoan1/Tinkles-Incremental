@@ -49,8 +49,8 @@ func _gui_input(event: InputEvent) -> void:
 				
 				building.global_position = tile_global_pos
 				building.building_res = building_res
-				#building.global_position = get_global_mouse_position()
-				get_tree().current_scene.add_child(building)
+				#get_tree().current_scene.add_child(building)
+				get_tree().current_scene.find_child("BuildingSpawner").add_child(building)
 				
 				print("building purchased!")
 				
@@ -63,6 +63,7 @@ func _gui_input(event: InputEvent) -> void:
 				# might need to update it in the game manager, but updating the res should work
 				#GameManager.buildings[GameManager.buildings.find(building_res)].purchased = true
 				building_res.purchased = true
+				building_res.placement = tile_global_pos
 				GameManager.update_shop()
 				
 			elif not can_place:

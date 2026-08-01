@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://byqrbl5ekqen8"]
 
+[ext_resource type="Script" uid="uid://d00jsq7btu7ou" path="res://Objects/Buildings/building_spawner.gd" id="1_dg77c"]
 [ext_resource type="Script" uid="uid://0p1qsoxpibrv" path="res://Game Logic/lemming_spawner.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://fwjhxctb4gix" path="res://Objects/Particle/particle_manager.gd" id="1_lquwl"]
 [ext_resource type="PackedScene" uid="uid://c0arlauc1koa8" path="res://Objects/Lemming/lemming.tscn" id="2_0xm2m"]
@@ -62,6 +63,9 @@ autostart = true
 
 [node name="Buffet" parent="." unique_id=241154822 instance=ExtResource("4_lquwl")]
 position = Vector2(317, 405)
+
+[node name="BuildingSpawner" type="Node2D" parent="." unique_id=58301326]
+script = ExtResource("1_dg77c")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1452592837]
 script = ExtResource("4_1bvp3")
